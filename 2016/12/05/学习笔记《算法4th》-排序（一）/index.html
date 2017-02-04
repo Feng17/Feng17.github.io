@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="以前经常在别人博客里看到他们总结的排序算法，最近在看《算法》第二章都是在讲排序，觉得自己也可以写一些总结来加深下理解，以后有些内容忘了也可以很快找出看看。  实现代码来自原书。
+按照算法的复杂度分为 1.简单排序：冒泡排序，简单选择排序，直接插入排序  2.改进排序：希尔排序，堆排序，归并排序，快速排序
+按照排序的方式又可分为：
+
+1.插入排序:直接插入排序、希尔排序。
+2.选择排序:直接选择排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记《算法4th》 排序（一）">
+<meta property="og:url" content="http://yoursite.com/2016/12/05/学习笔记《算法4th》-排序（一）/index.html">
+<meta property="og:site_name" content="Feng's blog">
+<meta property="og:description" content="以前经常在别人博客里看到他们总结的排序算法，最近在看《算法》第二章都是在讲排序，觉得自己也可以写一些总结来加深下理解，以后有些内容忘了也可以很快找出看看。  实现代码来自原书。
+按照算法的复杂度分为 1.简单排序：冒泡排序，简单选择排序，直接插入排序  2.改进排序：希尔排序，堆排序，归并排序，快速排序
+按照排序的方式又可分为：
+
+1.插入排序:直接插入排序、希尔排序。
+2.选择排序:直接选择排序">
+<meta property="og:updated_time" content="2017-02-04T09:01:57.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习笔记《算法4th》 排序（一）">
+<meta name="twitter:description" content="以前经常在别人博客里看到他们总结的排序算法，最近在看《算法》第二章都是在讲排序，觉得自己也可以写一些总结来加深下理解，以后有些内容忘了也可以很快找出看看。  实现代码来自原书。
+按照算法的复杂度分为 1.简单排序：冒泡排序，简单选择排序，直接插入排序  2.改进排序：希尔排序，堆排序，归并排序，快速排序
+按照排序的方式又可分为：
+
+1.插入排序:直接插入排序、希尔排序。
+2.选择排序:直接选择排序">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/05/学习笔记《算法4th》-排序（一）/"/>
+
+
+
+
+
+  <title> 学习笔记《算法4th》 排序（一） | Feng's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Feng's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">所知甚少，唯愿学</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/05/学习笔记《算法4th》-排序（一）/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                学习笔记《算法4th》 排序（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T16:49:51+08:00">
+                2016-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以前经常在别人博客里看到他们总结的排序算法，最近在看《算法》第二章都是在讲排序，觉得自己也可以写一些总结来加深下理解，以后有些内容忘了也可以很快找出看看。  实现代码来自原书。</p>
+<p>按照算法的复杂度分为 1.简单排序：冒泡排序，简单选择排序，直接插入排序  2.改进排序：希尔排序，堆排序，归并排序，快速排序</p>
+<p>按照排序的方式又可分为：</p>
+<ul>
+<li>1.插入排序:直接插入排序、希尔排序。</li>
+<li>2.选择排序:直接选择排序、堆排序。</li>
+<li>3.交换排序:冒泡排序、快速排序。</li>
+<li>4.线性排序:计数排序、基数排序、桶排序;其中基数排序又叫桶排序。</li>
+<li>5.递归排序:归并排序。<a id="more"></a></li>
+</ul>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>基本思想：就是在当前序列中，找到最小的元素，然后与首位元素交换位置。然后将无序的序列逐渐缩小。</p>
+<p>假如有n个元素。</p>
+<p>1、在n个元素中找到最小的元素，与第一个交换位置。</p>
+<p>2、在n-1个元素中找到最小的元素，与第二个交换位置。</p>
+<p>3、与此类推，直到最后一个元素。</p>
+<p>例如4,1,3,2,5,6,0,7 这个无序序列进行简单选择排序，首先要选择4以外的最小数来和4交换，也就是选择0和4交换，一次排序后就变成了0,1,3,2,5,6,4,7 接着对剩下的序列一次进行选择和交换，最终就会得到一个有序序列，选择排序可以看成冒泡排序的优化，因为其目的相同，只是选择排序只有在确定了最小数的前提下才进行交换，大大减少了交换的次数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Selection</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">7</span>&#125;;</div><div class="line">        System.out.println(Arrays.toString(a));  </div><div class="line">        </div><div class="line">        selectionsort(a);</div><div class="line">        System.out.println(Arrays.toString(a));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> min)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> temp = a[i]; </div><div class="line">		a[i] = a[min]; </div><div class="line">		a[min] = temp;			</div><div class="line">	&#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectionsort</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> N = a.length;   </div><div class="line">      <span class="comment">//每个循环交换一个，既是每个位置只交换一次，共N次</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N - <span class="number">1</span>; i++) </div><div class="line">        &#123;</div><div class="line">        	<span class="keyword">int</span> min = i;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; N; j++) <span class="comment">//将a[i]和 a[i+1]到a[n] 中最小的元素交换且每一次for循环，获</span></div><div class="line">            &#123;                               <span class="comment">//得i+1到n中最小元素的下标</span></div><div class="line">                <span class="keyword">if</span> (a[min] &gt; a[j])</div><div class="line">                &#123;</div><div class="line">                    min = j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            swap(a, i, min);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>时间复杂度O(n^2)</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序的基本操作是将一个元素插入到已经排好序的有序表中，简便的做法是，当前元素不断交换位置来找到一个合适的位置。当前面元素是有序时，此时遍历到的元素就一直与它前面的元素进行比较直到找到合适的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Insertion</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span>[] a = &#123;<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">7</span>&#125;;</div><div class="line">	     System.out.println(Arrays.toString(a));  </div><div class="line">	        </div><div class="line">	     insertionsort(a);</div><div class="line">	     System.out.println(Arrays.toString(a));</div><div class="line">	    &#125;</div><div class="line">	</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> min)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> temp = a[i]; </div><div class="line">			a[i] = a[min]; </div><div class="line">			a[min] = temp;			</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertionsort</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> N= a.length;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;N; i++) </div><div class="line">			&#123;    <span class="comment">//将a[i]插入到a[i-1],a[i-2]....a[0]里面合适的位置</span></div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span> &amp;&amp; a[j]&lt;a[j-<span class="number">1</span>]; j--) </div><div class="line">			    &#123;</div><div class="line">				  swap(a,j,j-<span class="number">1</span>);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">					    </div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>时间复杂度O(n^2)</p>
+<h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序可以说是插入排序的一个优化。希尔排序的思想是使数组中任意间隔为h的元素都是有序的即选择一个增量（间隔）h，将大数组分为间隔为h的元素组成的 h个数组，然后对这些数组分别进行插入排序待整个序列中的记录基本有序时再对全体记录进行一次直接插入排序。</p>
+<p>希尔排序的特点是，子序列的构成不是简单的逐段分割，而是将某个相隔某个增量的记录组成一个子序列。如上面的例子，第一堂排序时的增量为5，第二趟排序的增量为3。由于前两趟的插入排序中记录的关键字是和同一子序列中的前一个记录的关键字进行比较，因此关键字较小的记录就不是一步一步地向前挪动，而是跳跃式地往前移，从而使得进行最后一趟排序时，整个序列已经做到基本有序，只要作记录的少量比较和移动即可。因此希尔排序的效率要比直接插入排序高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shell</span> </span>&#123;</div><div class="line"></div><div class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">       <span class="keyword">int</span>[] a = &#123;<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">0</span>&#125;;</div><div class="line">       System.out.println(Arrays.toString(a));</div><div class="line"></div><div class="line">       shellsort(a);</div><div class="line">       System.out.println(Arrays.toString(a));</div><div class="line">   &#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> min)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> temp = a[i]; </div><div class="line">		a[i] = a[min]; </div><div class="line">		a[min] = temp;			</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shellsort</span><span class="params">(<span class="keyword">int</span>[] a)</span> </span>&#123;</div><div class="line">	        <span class="keyword">int</span> N = a.length;</div><div class="line">	        <span class="keyword">int</span> h = <span class="number">1</span>;     <span class="comment">//步长</span></div><div class="line">	        <span class="keyword">while</span> (h &lt; N/<span class="number">3</span>)</div><div class="line">	        &#123;</div><div class="line">	            h = <span class="number">3</span>*h +<span class="number">1</span>; <span class="comment">// 1,4,13,40,121,364....</span></div><div class="line">	        &#125;</div><div class="line"></div><div class="line">	        <span class="keyword">while</span> (h&gt;=<span class="number">1</span>)</div><div class="line">	        &#123;</div><div class="line">	            <span class="keyword">for</span> (<span class="keyword">int</span> i = h; i &lt; N; i++) </div><div class="line">	            &#123;                             <span class="comment">//将数组整理成【h有序数组】，</span></div><div class="line">	                <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt;= h &amp;&amp; a[j]&lt;a[j-h]; j-=h)</div><div class="line">	                &#123;</div><div class="line">	                    swap(a,j,j-h);</div><div class="line">	                &#125;</div><div class="line">	            &#125;</div><div class="line">	            System.out.println(Arrays.toString(a));</div><div class="line">	            h = h/<span class="number">3</span>;</div><div class="line">	        &#125;</div><div class="line"></div><div class="line">	      </div><div class="line">	    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>希尔排序是将相隔某个增量的记录组成一个子序列，实现跳跃式的移动，使得排序效率的提高。</p>
+<p>在大量实验的基础上推出当n在某个范围内时，时间复杂度可以达到O(n^1.3)。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/03/java基础/" rel="next" title="java基础">
+                <i class="fa fa-chevron-left"></i> java基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/08/学习笔记《算法4th》-排序（二）/" rel="prev" title="学习笔记《算法4th》 排序（二）">
+                学习笔记《算法4th》 排序（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg"
+               alt="Feng" />
+          <p class="site-author-name" itemprop="name">Feng</p>
+          <p class="site-description motion-element" itemprop="description">myblog</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Feng17" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">1.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">2.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">3.</span> <span class="nav-text">希尔排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
