@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="​    之前在刚开始学习java时对方法参数那块有点疑惑，之后在看了java核心技术书中相关内容后了解了这部分，觉得动手再写一遍以便加深下理解吧。
-创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变量即引用 例如 Date dead">
+<meta name="description" content="​    最近做题常碰到有关方法参数的问题，想起了之前在刚开始学习java时对引用类型和基本类型那块老有点疑惑，最近看了《Java核心技术》书中相关内容，觉得动手写一点再加深下理解。
+创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java基础">
 <meta property="og:url" content="http://yoursite.com/2016/11/03/java基础/index.html">
 <meta property="og:site_name" content="Feng's blog">
-<meta property="og:description" content="​    之前在刚开始学习java时对方法参数那块有点疑惑，之后在看了java核心技术书中相关内容后了解了这部分，觉得动手再写一遍以便加深下理解吧。
-创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变量即引用 例如 Date dead">
-<meta property="og:updated_time" content="2017-01-23T09:07:49.745Z">
+<meta property="og:description" content="​    最近做题常碰到有关方法参数的问题，想起了之前在刚开始学习java时对引用类型和基本类型那块老有点疑惑，最近看了《Java核心技术》书中相关内容，觉得动手写一点再加深下理解。
+创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变">
+<meta property="og:updated_time" content="2017-02-16T14:54:53.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础">
-<meta name="twitter:description" content="​    之前在刚开始学习java时对方法参数那块有点疑惑，之后在看了java核心技术书中相关内容后了解了这部分，觉得动手再写一遍以便加深下理解吧。
-创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变量即引用 例如 Date dead">
+<meta name="twitter:description" content="​    最近做题常碰到有关方法参数的问题，想起了之前在刚开始学习java时对引用类型和基本类型那块老有点疑惑，最近看了《Java核心技术》书中相关内容，觉得动手写一点再加深下理解。
+创建对象​    在java中通过new关键字来创建对象，语法为 new 类名（）（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变">
 
 
 
@@ -318,7 +318,7 @@
       
 
       
-        <p>​    之前在刚开始学习java时对方法参数那块有点疑惑，之后在看了java核心技术书中相关内容后了解了这部分，觉得动手再写一遍以便加深下理解吧。</p>
+        <p>​    最近做题常碰到有关方法参数的问题，想起了之前在刚开始学习java时对引用类型和基本类型那块老有点疑惑，最近看了《Java核心技术》书中相关内容，觉得动手写一点再加深下理解。</p>
 <h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>​    在java中通过new关键字来创建对象，语法为 <strong>new 类名（）</strong>（可以在括号中指定一系列参数，如果构造器需要得到话，一般用于初始化）创建对象的过程也叫实例化。为了能将对象进行访问控制需要一个特殊的变量即引用 例如 <code>Date deadline=new Date()</code> 表达式new Date()调用构造器构造了一个Date类型的对象。 定义了一个变量deadline，它可以引用Date类型的变量。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Date   deadline = <span class="keyword">new</span> Date()</div><div class="line">类名      引用  ---&gt;  对象</div></pre></td></tr></table></figure>
 <p>​    引用需要说明的事：</p>
@@ -327,7 +327,6 @@
 </li>
 <li><p>除8种基本类型之外，用类、接口、数组等声明的变量都称为引用类型变量，简称“引用”。</p>
 <p>总结：所有的对象都有三大特性 状态（数据类型中的值） 标识（它在内存中的位置） 行为（对数据类型的操作）引用是访问对象的一种方式可以认为引用就是内存地址。java中术语引用类型以示和原始数据类型的区别。</p>
-<p>​</p>
 </li>
 </ol>
 <h3 id="方法参数"><a href="#方法参数" class="headerlink" title="方法参数"></a>方法参数</h3><p>​    java中总是采用<strong>按值调用</strong>而不是按引用调用。 我们经常在编写排序算法时会经常要交换2个值，2个都是基本数据类型的变量我们可以轻易写出swap()来交换二者值但如果两个变量是引用类型就不行。例如</p>
@@ -449,7 +448,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
