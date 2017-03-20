@@ -321,7 +321,7 @@
       
         
           <p>寒假就要结束了，接下来就要进入大三下学期的生活，感觉时间过得很快。在这里写点东西，当做是寒假和上学期的总结，也记下点展望。</p>
-<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>2016年国庆放假时跟着教程用Hexo建了博客，之后试着在上面写了点东西，因为经常看别人博客里总结的知识，深感自己会的太少了，写技术类的博客自己的水平肯定是不够的，但我觉得可以写一点在学习路线上的笔记，而且马上也要面临找工作了，一些经常要用到的知识可以自己整理下放到博客里，需要的的时候也可以再看看。</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>2016年国庆放假时跟着教程用Hexo建了博客，之后试着在上面写了点东西，因为经常看别人博客里总结的知识，深感自己会的太少了，写技术类的博客自己的水平肯定是不够的，但我觉得可以写一点在学习路线上的笔记，而且以后也会面临找工作，一些经常要用到的知识可以自己整理下放到博客里，需要的的时候也可以再看看。</p>
 <h3 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h3><p>英语不管在什么专业上都是很重要的，寒假也坚持每天背单词，虽然去年通过了六级但跟周围小伙伴们相比分数还是不高的，打算下学期再报一次，另外上学期也报了英语竞赛，接下来也要准备一段时间，希望能拿个奖。其实感觉语言的学习没有捷径，最重要的是输入和输出量，并且输出大于输入，就像学学习编程，天天光看源码肯定学不精，还是要自己多动手。英语学习的话平时就应该坚持多看一些英语文章，听听新闻，碰到不会的单词就应该马上搞懂，觉得对自己有用的内容就可以记录下来；另外兴趣是最好的老师，可以看自己喜欢的美剧(做到逐渐放弃字幕) 自己喜欢书籍的英文版和国外的学习课程。我觉得Quora和VOA都是很不错的途径。总之语言学习就是个长期积累不断重复的过程 ，贵在坚持。
           <!--noindex-->
           <div class="post-button text-center">
@@ -451,7 +451,10 @@
 <li>堆排序的堆（二叉堆）是一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级存储</li>
 <li>一棵大小为N的完全二叉树，高度为lgN</li>
 </ul>
-<p>堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。
+<p>堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。</p>
+<h3 id="构建堆"><a href="#构建堆" class="headerlink" title="构建堆"></a>构建堆</h3><p>用数组实现堆，我们设数组下标从0开始，下标为k的结点，它的左孩子是2k+1，右孩子即2k+2</p>
+<p>使用堆排序首先我们需要构建堆，对于一个普通的数组，我们可以将他看成一个无序的堆然后通过堆的插入元素方法，一个一个插入原数组的元素，进而完成一个新堆，我们可以只将前N/2的元素，下沉到合适的位置即可，此时堆即有序，后N/2全是叶子结点，无需下沉。</p>
+<h3 id="堆有序（下沉操作）"><a href="#堆有序（下沉操作）" class="headerlink" title="堆有序（下沉操作）"></a>堆有序（下沉操作）</h3><p>如果堆的有序状态，因为某个结点比它的两个子结点或者其中之一小而打破了，那么可以通过将它与它的两个子结点中的较大者来交换来修复堆。交换可能会在子节点处继续打破堆有序，因此我们需要不断用相同方式来将其修复。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/12/08/学习笔记《算法4th》-排序（二）/#more" rel="contents">
@@ -762,7 +765,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/02/seize/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/10/Git基本操作/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Feng">
@@ -787,8 +790,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/10/02/seize/" itemprop="url">
-                  MarkDown语法
+                <a class="post-title-link" href="/2016/10/10/Git基本操作/" itemprop="url">
+                  Git基本操作
                 </a>
               
             
@@ -804,8 +807,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-02T01:19:58+08:00">
-                2016-10-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-10T16:49:51+08:00">
+                2016-10-10
               </time>
             
 
@@ -841,20 +844,21 @@
 
       
         
-          
-            <p>测试一下，看远端有没有内容。 顺便试下MarkDown语法</p>
-<h3 id="文章标题"><a href="#文章标题" class="headerlink" title="文章标题"></a>文章标题</h3><blockquote>
-<p>1<br>2</p>
-</blockquote>
-<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><ul>
-<li>1</li>
-<li>2</li>
-</ul>
-<p><code>自然选择，前进四！ Natural Selection,Ahead Four !</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> min)</span> </span>&#123;</div><div class="line">			<span class="keyword">int</span> temp = a[i]; </div><div class="line">			a[i] = a[min]; </div><div class="line">			a[min] = temp;			</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
-<p><img src="https://ooo.0o0.ooo/2017/02/16/58a5bdd551766.png" alt="10288044.png"></p>
-
-          
+          <h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
+<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
+<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>我们如果要上传或下载代码，肯定本地Git仓库要与我们在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以我们要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
+<p>执行后我们会在用户主目录下可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样我们本地就可以与远端GitHub建立联系了。为什么GitHub需要SSH Key因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是你输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
+<h3 id="Git仓库"><a href="#Git仓库" class="headerlink" title="Git仓库"></a>Git仓库</h3><p>打开命令行终端，进入项目所在的本地目录，将目录初始化为一个 Git 项目</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/10/Git基本操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -929,7 +933,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -90,7 +90,8 @@
 堆排序的堆（二叉堆）是一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级存储
 一棵大小为N的完全二叉树，高度为lgN
 
-堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。">
+堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。
+构建堆用数组实现堆，我们设数组下标从0开">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习笔记《算法4th》 排序（二）">
 <meta property="og:url" content="http://yoursite.com/2016/12/08/学习笔记《算法4th》-排序（二）/index.html">
@@ -101,8 +102,9 @@
 堆排序的堆（二叉堆）是一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级存储
 一棵大小为N的完全二叉树，高度为lgN
 
-堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。">
-<meta property="og:updated_time" content="2017-02-16T13:53:49.275Z">
+堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。
+构建堆用数组实现堆，我们设数组下标从0开">
+<meta property="og:updated_time" content="2017-03-20T12:35:05.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习笔记《算法4th》 排序（二）">
 <meta name="twitter:description" content="堆排序定义：
@@ -111,7 +113,8 @@
 堆排序的堆（二叉堆）是一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级存储
 一棵大小为N的完全二叉树，高度为lgN
 
-堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。">
+堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。
+构建堆用数组实现堆，我们设数组下标从0开">
 
 
 
@@ -339,10 +342,10 @@
 <li>堆排序的堆（二叉堆）是一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级存储</li>
 <li>一棵大小为N的完全二叉树，高度为lgN</li>
 </ul>
-<p>堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。<a id="more"></a></p>
+<p>堆排序可以分为两个阶段，在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段中，我们从堆中按递减顺序取出所有元素并得到排序结果。</p>
 <h3 id="构建堆"><a href="#构建堆" class="headerlink" title="构建堆"></a>构建堆</h3><p>用数组实现堆，我们设数组下标从0开始，下标为k的结点，它的左孩子是2k+1，右孩子即2k+2</p>
 <p>使用堆排序首先我们需要构建堆，对于一个普通的数组，我们可以将他看成一个无序的堆然后通过堆的插入元素方法，一个一个插入原数组的元素，进而完成一个新堆，我们可以只将前N/2的元素，下沉到合适的位置即可，此时堆即有序，后N/2全是叶子结点，无需下沉。</p>
-<h3 id="堆有序（下沉操作）"><a href="#堆有序（下沉操作）" class="headerlink" title="堆有序（下沉操作）"></a>堆有序（下沉操作）</h3><p>如果堆的有序状态，因为某个结点比它的两个子结点或者其中之一小而打破了，那么可以通过将它与它的两个子结点中的较大者来交换来修复堆。交换可能会在子节点处继续打破堆有序，因此我们需要不断用相同方式来将其修复。</p>
+<h3 id="堆有序（下沉操作）"><a href="#堆有序（下沉操作）" class="headerlink" title="堆有序（下沉操作）"></a>堆有序（下沉操作）</h3><p>如果堆的有序状态，因为某个结点比它的两个子结点或者其中之一小而打破了，那么可以通过将它与它的两个子结点中的较大者来交换来修复堆。交换可能会在子节点处继续打破堆有序，因此我们需要不断用相同方式来将其修复。<a id="more"></a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Deap</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span>[] a = &#123;<span class="number">73</span>,<span class="number">98</span>,<span class="number">27</span>,<span class="number">36</span>,<span class="number">77</span>,<span class="number">22</span>,<span class="number">6</span>,<span class="number">32</span>,<span class="number">83</span>,<span class="number">69</span>&#125;;</div><div class="line">        System.out.println(Arrays.toString(a));</div><div class="line"></div><div class="line">        a = DeapSort(a);</div><div class="line">        System.out.println(Arrays.toString(a));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] DeapSort(<span class="keyword">int</span>[] a) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> N = a.length-<span class="number">1</span>;</div><div class="line">   <span class="comment">//构建二叉堆  从下标为N/2开始一直到0的元素下沉到合适的位置即可。N/2后面的元素，其实都是叶子结点，无需下沉。</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = N/<span class="number">2</span>; k &gt;= <span class="number">0</span>; k--) &#123;    <span class="comment">// 从右向左数 第一个含有子节点的非叶子结点开始调整</span></div><div class="line">            sink(a, k, N);</div><div class="line">         <span class="comment">//   System.out.println(Arrays.toString(a));</span></div><div class="line">        &#125;</div><div class="line"><span class="comment">//堆的根结点永远是最大值，我们只需将最大值和最后一位的元素互换位置。然后再维护一个除原最大结点以外的N-1的堆，再  //将新堆的根节点放在倒数第二的位置。如此反复</span></div><div class="line">        <span class="keyword">while</span> (N &gt; <span class="number">0</span>) &#123;</div><div class="line">            swap(a, <span class="number">0</span>, N--);    <span class="comment">//将堆的最大元素a[0]和a[N]交换，</span></div><div class="line">            sink(a, <span class="number">0</span>, N);          <span class="comment">//调整堆， 直到堆空</span></div><div class="line">          <span class="comment">//  System.out.println(Arrays.toString(a));</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> a;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sink</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span> (<span class="number">2</span> * k &lt; N) &#123;</div><div class="line">            <span class="keyword">int</span> j = <span class="number">2</span> * k+<span class="number">1</span>;    <span class="comment">//a[j]为 a[k]的左子结点 j为左孩子下标</span></div><div class="line">            <span class="keyword">if</span> (j &lt; N &amp;&amp; a[j] &lt; a[j + <span class="number">1</span>]) <span class="comment">//j&lt;N即存在右孩子 a[j] &lt; a[j + 1]即左孩子小于右孩子</span></div><div class="line">            &#123;</div><div class="line">                j++;        <span class="comment">//保证a[j]指向 a[k]的较大的那个孩子结点</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (a[k] &gt; a[j]) &#123; <span class="comment">//如果根节点a[k]没有小于它的孩子则不用下沉了</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;    <span class="comment">//否则 交换a[k] 和a[j]</span></div><div class="line">                swap(a, j, k);      <span class="comment">//为了保证a[k]（堆顶）（父亲永远比儿子大）</span></div><div class="line">                k = j;  <span class="comment">// 然后 继续 a[k]的子结点和a[k]的孙结点进行比较</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> i, <span class="keyword">int</span> min)</span> </span>&#123;</div><div class="line">  		<span class="keyword">int</span> temp = a[i]; </div><div class="line">  		a[i] = a[min]; </div><div class="line">  		a[min] = temp;			</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">    </div><div class="line">    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>时间复杂度 nlogn  空间复杂度O(1)</p>
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快速排序可能是应用最广泛的排序算法了，快排流行的原因因为它快且实现简单。</p>
@@ -357,70 +360,70 @@
 <table>
 <thead>
 <tr>
-<th>排序方法</th>
-<th style="text-align:right">平均情况</th>
+<th style="text-align:center">排序方法</th>
+<th style="text-align:center">平均情况</th>
 <th style="text-align:center">最好情况</th>
-<th>最坏情况</th>
-<th>辅助空间</th>
-<th>稳定性</th>
+<th style="text-align:center">最坏情况</th>
+<th style="text-align:center">辅助空间</th>
+<th style="text-align:center">稳定性</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>冒泡排序</td>
-<td style="text-align:right">O(n^2)</td>
-<td style="text-align:center">O(n)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>稳定</td>
-</tr>
-<tr>
-<td>简单选择排序</td>
-<td style="text-align:right">O(n^2)</td>
+<td style="text-align:center">冒泡排序</td>
 <td style="text-align:center">O(n^2)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>稳定</td>
-</tr>
-<tr>
-<td>直接插入排序</td>
-<td style="text-align:right">O(n^2)</td>
 <td style="text-align:center">O(n)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>稳定</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
 </tr>
 <tr>
-<td>希尔排序</td>
-<td style="text-align:right">O(nlogn)~O(n^2)</td>
+<td style="text-align:center">简单选择排序</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">直接插入排序</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(n)</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">希尔排序</td>
+<td style="text-align:center">O(nlogn)~O(n^2)</td>
 <td style="text-align:center">O(n^1.3)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>不稳定</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
 </tr>
 <tr>
-<td>堆排序</td>
-<td style="text-align:right">O(nlogn)</td>
+<td style="text-align:center">堆排序</td>
 <td style="text-align:center">O(nlogn)</td>
-<td>O(nlogn)</td>
-<td>O(1)</td>
-<td>不稳定</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
 </tr>
 <tr>
-<td>归并排序</td>
-<td style="text-align:right">O(nlogn)</td>
+<td style="text-align:center">归并排序</td>
 <td style="text-align:center">O(nlogn)</td>
-<td>O(nlogn)</td>
-<td>O(1)</td>
-<td>稳定</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">稳定</td>
 </tr>
 <tr>
-<td>快速排序</td>
-<td style="text-align:right">O(nlogn)</td>
+<td style="text-align:center">快速排序</td>
 <td style="text-align:center">O(nlogn)</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>不稳定</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(n^2)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不稳定</td>
 </tr>
 </tbody>
 </table>
@@ -532,7 +535,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
