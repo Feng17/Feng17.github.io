@@ -241,6 +241,136 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/03/Git基本操作/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/03/Git基本操作/" itemprop="url">
+                  Git基本操作
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-03T16:49:51+08:00">
+                2016-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
+<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
+<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>我们如果要上传或下载代码，肯定本地Git仓库要与我们在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以我们要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
+<p>执行后我们会在用户主目录下可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样我们本地就可以与远端GitHub建立联系了。为什么GitHub需要SSH Key因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是你输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
+<h3 id="Git仓库"><a href="#Git仓库" class="headerlink" title="Git仓库"></a>Git仓库</h3><p>打开命令行终端，进入项目所在的本地目录，将目录初始化为一个 Git 项目</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/03/Git基本操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/10/java基础/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,7 +821,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

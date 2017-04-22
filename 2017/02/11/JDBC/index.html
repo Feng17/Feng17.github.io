@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。
+使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC">
+<meta property="og:url" content="http://yoursite.com/2017/02/11/JDBC/index.html">
+<meta property="og:site_name" content="Feng's blog">
+<meta property="og:description" content="JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。
+使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最">
+<meta property="og:updated_time" content="2017-04-22T16:28:56.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC">
+<meta name="twitter:description" content="JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。
+使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/11/JDBC/"/>
+
+
+
+
+
+  <title> JDBC | Feng's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Feng's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">所知甚少，唯愿学</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/JDBC/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JDBC
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T22:34:24+08:00">
+                2017-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。</p>
+<p>使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最后我们需要关闭数据库连接、语句和结果集(关闭资源时采用倒关的手法)。看上去挺麻烦的，还需要捕获SQLException，不过最近看到其他书上写的之后学习了Spring后可以使用Spring的JdbcTemplate来进行操作避免JDBC的样板式代码，这个在之后框架再好好学习下。</p>
+<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DButil</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url=<span class="string">"jdbc:mysql://localhost:3306/数据库名"</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String username=<span class="string">"root"</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password=<span class="string">"123456"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Connection conn=<span class="keyword">null</span>;</div><div class="line">  </div><div class="line">	<span class="keyword">public</span> DButil &#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>); <span class="comment">//加载驱动类</span></div><div class="line">           </div><div class="line">		    conn = DriverManager.getConnection(url,username,password); <span class="comment">//获得数据库连接</span></div><div class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="SQL的一些知识"><a href="#SQL的一些知识" class="headerlink" title="SQL的一些知识"></a>SQL的一些知识</h3><h4 id="DDL语法"><a href="#DDL语法" class="headerlink" title="DDL语法"></a>DDL语法</h4><p>在命令行中输入<code>mysql -uroot -p</code>来进入MySQL，接着我们可以使用DDL语言来对数据库和表结构进行操作：</p>
+<p>查看所有数据库:<code>SHOW DATABASES;</code></p>
+<p>使用数据库:<code>USE 数据库名;</code>  (分号不能忘)</p>
+<p>在数据库中新建表，例如新建学生信息的表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT, </div><div class="line">	<span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	age <span class="built_in">INT</span>,</div><div class="line">	sex  <span class="built_in">VARCHAR</span>(<span class="number">3</span>),</div><div class="line">	id_number <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</div><div class="line">	);</div></pre></td></tr></table></figure>
+<h5 id="SQL数据中的属性类型"><a href="#SQL数据中的属性类型" class="headerlink" title="SQL数据中的属性类型"></a>SQL数据中的属性类型</h5><ul>
+<li><p>int:4字节，整型,大整数值。tinyint:1字节,小整数值。  smallint:2字节，大整数值。  也可以加上unsigned关键字，定义成无符号的类型。<a id="more"></a></p>
+</li>
+<li><p>float(m, d):4字节，单精度浮点型，m总个数，d小数位。   double(m, d):8字节，双精度浮点型，m总个数，d小数位。decimal(m, d):decimal是存储为字符串的浮点数。</p>
+</li>
+<li><p>char(n):字符型，固定长度字符串类型char(255);   数据的长度不足指定长度，它会补足到指定长度。</p>
+<p> varchar(n):可变长度字符串类型varchar(65535),存入的数据多长就是多长。varchar会使用1-3个字节来存储长度，text不会。括号中n代表字符的个数，并不代表字节个数。</p>
+<p> text:MySQL独有的数据类型text(65535)，字符串类型。</p>
+</li>
+<li><p>date:3字节，日期类型，格式：YYYY-MM-DD</p>
+<p> time:3字节，时间类型，格式为:hh:mm:ss</p>
+<p> datetime:8字节，日期时间，格式：:YYYY-MM-DD hh:mm:ss</p>
+</li>
+<li><p>blob:blob字节类型常常是数据库中用来存储二进制文件的字段类型,典型的blob是一张图片或一个声音文件。</p>
+</li>
+</ul>
+<h4 id="DML语法"><a href="#DML语法" class="headerlink" title="DML语法"></a>DML语法</h4><ul>
+<li><p>插入数据: <code>insert into 表名 (列名1，列名2，列名3) values (列值1，列值2，列值3)</code> 一次插入就是一行</p>
+</li>
+<li><p>修改数据: 修改某列的全部值:<code>update 表名 set 列名称 =新值</code> </p>
+<p>修改列的指定值:<code>update表名称 set 列名称 = 新值 where列名称 = 某值</code></p>
+</li>
+<li><p>获取数据: <code>select 列名称 from 表名称</code>   <code>select* from 表名称</code> –星号（*）是选取所有列的快捷方式</p>
+<p> 如需有条件地从表中选取数据，可将 where子句添加到 select 语句</p>
+<p>例如 <code>select * from student where age=&#39;20&#39;</code></p>
+</li>
+<li><p>删除数据:delete语句用于删除表中的行 <code>delete from 表名称 where 列名称 = 值</code></p>
+</li>
+</ul>
+<h3 id="JDBC对数据库进行CRUD操作"><a href="#JDBC对数据库进行CRUD操作" class="headerlink" title="JDBC对数据库进行CRUD操作"></a>JDBC对数据库进行CRUD操作</h3><h4 id="PreparedStatement"><a href="#PreparedStatement" class="headerlink" title="PreparedStatement"></a>PreparedStatement</h4><p>PrepaerdStatement是Statement的子接口，Statement接口用于执行静态SQL语句并返回它所生成结果的对象。PrepaerdStatement对象比Statement对象效率更高，而且也可以防止SQL注入，所以我们一般用PrepaerdStatement。</p>
+<p>常用Statement方法：</p>
+<p>1.excute():运行语句，返回是否有结果集。</p>
+<p>2.excuteQuery():运行select语句，返回ResultSet结果集。</p>
+<p>3.excuteUpdate():运行insert/update/delete语句，返回更新的行数。</p>
+<h4 id="ResultSet"><a href="#ResultSet" class="headerlink" title="ResultSet"></a>ResultSet</h4><p>Statement执行SQL语句时返回ResultSet结果集。</p>
+<p>常用ResultSet方法：</p>
+<p>1.getInt():获得在数据库里时int类型的对象。</p>
+<p>2.getString():获得在数据库里时varchar,char类型的对象。</p>
+<p>3.getFloat():获得在数据库里时float类型的对象。</p>
+<p>4.getDate():获得在数据库里时date类型的对象。</p>
+<p>5.getBoolean():获得在数据库里时boolean类型的对象。</p>
+<h4 id="增、删、改、查"><a href="#增、删、改、查" class="headerlink" title="增、删、改、查"></a>增、删、改、查</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">//添加学生信息</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertStudent</span><span class="params">(Student student)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = DBUtil.getConnection();</div><div class="line">		String sql = <span class="string">"insert into student (name,age,sex,id_number) values(?,?,?,?)"</span>;</div><div class="line">		<span class="comment">//预编译sql语句</span></div><div class="line">		PreparedStatement psmt = con.prepareStatement(sql);</div><div class="line">		<span class="comment">//赋值</span></div><div class="line">		psmt.setString(<span class="number">1</span>,student.getName());</div><div class="line">		psmt.setInt(<span class="number">2</span>, student.getAge());</div><div class="line">		psmt.setString(<span class="number">3</span>,student.getSex());</div><div class="line">		psmt.setString(<span class="number">4</span>,student.Id_number());</div><div class="line">		psmt.executeUpdate();<span class="comment">//执行插入操作，返回更新的行数</span></div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//按姓名删除学生信息</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteStudentByName</span><span class="params">(String name)</span> <span class="keyword">throws</span> SQLException </span>&#123;</div><div class="line">		Connection con = DBUtil.getConnection();</div><div class="line">		String sql =<span class="string">"delete from student where name=?"</span>;</div><div class="line">		PreparedStatement psmt = con.prepareStatement(sql);</div><div class="line">		psmt.setString(<span class="number">1</span>,name);</div><div class="line">		psmt.executeUpdate();<span class="comment">//执行删除操作，按姓名删除</span></div><div class="line">	&#125; </div><div class="line">     <span class="comment">//按姓名修改学生信息</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateStudentByName</span><span class="params">(String name)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = DBUtil.getConnection();</div><div class="line">		String sql =<span class="string">"update student set name=?, age=?, sex=?, id_number=?  where name=?"</span>;</div><div class="line">		PreparedStatement psmt = con.prepareStatement(sql);</div><div class="line">		psmt.setString(<span class="number">1</span>,student.getName());</div><div class="line">		psmt.setInt(<span class="number">2</span>, student.getAge());</div><div class="line">		psmt.setString(<span class="number">3</span>, student.getSex());</div><div class="line">		psmt.setString(<span class="number">4</span>, student.getId_number());</div><div class="line">		psmt.excuteUpdate();<span class="comment">//执行修改操作，按姓名修改</span></div><div class="line">		</div><div class="line">	&#125;</div><div class="line">     <span class="comment">//查询所有学生</span></div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">findAllStudent</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = DBUtil.getConnection();</div><div class="line">		PreparedStatement psmt = con.prepareStatement(<span class="string">"select * from student "</span>);</div><div class="line">        List&lt;Student&gt; al = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		ResultSet  rs = psmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			Student stu = <span class="keyword">new</span> Student();</div><div class="line">			stu.setName(rs.getString(<span class="string">"name"</span>));</div><div class="line">			stu.setAge(rs.getInt(<span class="string">"age"</span>));</div><div class="line">			stu.setSex(rs.getString(<span class="string">"sex"</span>));</div><div class="line">			stu.setId_number(rs.getString(<span class="string">"id_number"</span>));</div><div class="line">			al.add(stu);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> al;</div><div class="line">	&#125;</div><div class="line">     <span class="comment">//按姓名查询学生                                                </span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">findStudentByName</span> <span class="params">(String name)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">		Connection con = DBUtil.getConnection();</div><div class="line">		PreparedStatement psmt = con.prepareStatement(<span class="string">"select * from student where name =? "</span>);</div><div class="line">        psmt.setString(<span class="number">1</span>, name);</div><div class="line">        List&lt;Student&gt; al = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		ResultSet  rs = psmt.executeQuery();</div><div class="line">		<span class="keyword">while</span>(rs.next()) &#123;</div><div class="line">			Student stu = <span class="keyword">new</span> Student();</div><div class="line">			stu.setName(rs.getString(<span class="string">"name"</span>));</div><div class="line">			stu.setAge(rs.getInt(<span class="string">"age"</span>));</div><div class="line">			stu.setSex(rs.getString(<span class="string">"sex"</span>));</div><div class="line">			stu.setId_number(rs.getString(<span class="string">"id_number"</span>));</div><div class="line">			al.add(stu);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> al;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/学习笔记《算法4th》-排序（二）/" rel="next" title="学习笔记《算法4th》 排序（二）">
+                <i class="fa fa-chevron-left"></i> 学习笔记《算法4th》 排序（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/17/寒假/" rel="prev" title="寒假">
+                寒假 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg"
+               alt="Feng" />
+          <p class="site-author-name" itemprop="name">Feng</p>
+          <p class="site-description motion-element" itemprop="description">myblog</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Feng17" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据库连接"><span class="nav-number">1.</span> <span class="nav-text">创建数据库连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL的一些知识"><span class="nav-number">2.</span> <span class="nav-text">SQL的一些知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DDL语法"><span class="nav-number">2.1.</span> <span class="nav-text">DDL语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#SQL数据中的属性类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">SQL数据中的属性类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DML语法"><span class="nav-number">2.2.</span> <span class="nav-text">DML语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC对数据库进行CRUD操作"><span class="nav-number">3.</span> <span class="nav-text">JDBC对数据库进行CRUD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PreparedStatement"><span class="nav-number">3.1.</span> <span class="nav-text">PreparedStatement</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResultSet"><span class="nav-number">3.2.</span> <span class="nav-text">ResultSet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增、删、改、查"><span class="nav-number">3.3.</span> <span class="nav-text">增、删、改、查</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Feng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
