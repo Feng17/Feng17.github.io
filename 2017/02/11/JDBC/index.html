@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Feng's blog">
 <meta property="og:description" content="JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。
 使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最">
-<meta property="og:updated_time" content="2017-04-23T11:35:52.609Z">
+<meta property="og:updated_time" content="2017-04-27T15:13:54.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDBC">
 <meta name="twitter:description" content="JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。
@@ -320,7 +320,7 @@
       
         <p>JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。</p>
 <p>使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最后我们需要关闭数据库连接、语句和结果集(关闭资源时采用倒关的手法)。看上去挺麻烦的，还需要捕获SQLException，不过最近看到其他书上写的之后学习了Spring后可以使用Spring的JdbcTemplate来进行操作避免JDBC的样板式代码，这个在之后框架再好好学习下。</p>
-<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序;</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.或得数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(URL, USER, PASSWORD);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"jdbc:mysql://localhost:3306/book2016"</span>; <span class="comment">//url格式</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
+<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序;</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.或得数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(url, user, password);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"jdbc:mysql://localhost:3306/数据库名称"</span>; <span class="comment">//url格式</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
 <h3 id="SQL的一些知识"><a href="#SQL的一些知识" class="headerlink" title="SQL的一些知识"></a>SQL的一些知识</h3><h4 id="DDL语法"><a href="#DDL语法" class="headerlink" title="DDL语法"></a>DDL语法</h4><p>在命令行中输入<code>mysql -uroot -p</code>来进入MySQL，接着我们可以使用DDL语言来对数据库和表结构进行操作：</p>
 <p>查看所有数据库:<code>SHOW DATABASES;</code></p>
 <p>使用数据库:<code>USE 数据库名;</code>  (分号不能忘)</p>
@@ -332,12 +332,12 @@
 <li><p>float(m, d):4字节，单精度浮点型，m总个数，d小数位。   double(m, d):8字节，双精度浮点型，m总个数，d小数位。decimal(m, d):decimal是存储为字符串的浮点数。</p>
 </li>
 <li><p>char(n):字符型，固定长度字符串类型char(255);   数据的长度不足指定长度，它会补足到指定长度。</p>
-<p>  varchar(n):可变长度字符串类型varchar(65535),存入的数据多长就是多长。varchar会使用1-3个字节来存储长度，text不会。括号中n代表字符的个数，并不代表字节个数。</p>
-<p>  text:MySQL独有的数据类型text(65535)，字符串类型。</p>
+<p>   varchar(n):可变长度字符串类型varchar(65535),存入的数据多长就是多长。varchar会使用1-3个字节来存储长度，text不会。括号中n代表字符的个数，并不代表字节个数。</p>
+<p>   text:MySQL独有的数据类型text(65535)，字符串类型。</p>
 </li>
 <li><p>date:3字节，日期类型，格式：YYYY-MM-DD</p>
-<p>  time:3字节，时间类型，格式为:hh:mm:ss</p>
-<p>  datetime:8字节，日期时间，格式：:YYYY-MM-DD hh:mm:ss</p>
+<p>   time:3字节，时间类型，格式为:hh:mm:ss</p>
+<p>   datetime:8字节，日期时间，格式：:YYYY-MM-DD hh:mm:ss</p>
 </li>
 <li><p>blob:blob字节类型常常是数据库中用来存储二进制文件的字段类型,典型的blob是一张图片或一个声音文件。</p>
 </li>
@@ -476,7 +476,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -241,6 +241,144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/正则表达式/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/22/正则表达式/" itemprop="url">
+                  正则表达式学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T15:49:58+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些关键知识点。</p>
+<p>正则表达式是用于匹配字符串中字符组合的模式。一个正则表达式模式可以是由简单的字符所构成的，也可以是简单和特殊字符的组合。</p>
+<h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><ul>
+<li><p><code>.</code> ：匹配除换行符以外的任意字符。</p>
+</li>
+<li><p><code>\d</code>：匹配数字，等同于<code>[0-9]</code>。</p>
+<p> 例如 <code>/\d/</code> 找到 “my number is 1316” 中的’1316’。</p>
+</li>
+<li><p><code>\w</code>：匹配字母或数字或下划线，等同于<code>[A-Za-z0-9_]</code>。</p>
+</li>
+<li><p><code>\s</code>：匹配任意的空白符。</p>
+</li>
+<li><p><code>\b</code>：匹配一个单词的边界，开始或结束。</p>
+<p>  例如<code>/\ba/</code> 找到“cake apple”中apple单词里的‘a’；<code>/le\b/</code>找到  “telephone apple” 中apple单词里的’le’，</p>
+</li>
+<li><p><code>^</code>：匹配输入的开始。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/22/正则表达式/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/16/过滤器Filter/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -572,7 +710,7 @@
         
           <p>JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。</p>
 <p>使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最后我们需要关闭数据库连接、语句和结果集(关闭资源时采用倒关的手法)。看上去挺麻烦的，还需要捕获SQLException，不过最近看到其他书上写的之后学习了Spring后可以使用Spring的JdbcTemplate来进行操作避免JDBC的样板式代码，这个在之后框架再好好学习下。</p>
-<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序;</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.或得数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(URL, USER, PASSWORD);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"jdbc:mysql://localhost:3306/book2016"</span>; <span class="comment">//url格式</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
+<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序;</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.或得数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(url, user, password);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"jdbc:mysql://localhost:3306/数据库名称"</span>; <span class="comment">//url格式</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
 <h3 id="SQL的一些知识"><a href="#SQL的一些知识" class="headerlink" title="SQL的一些知识"></a>SQL的一些知识</h3><h4 id="DDL语法"><a href="#DDL语法" class="headerlink" title="DDL语法"></a>DDL语法</h4><p>在命令行中输入<code>mysql -uroot -p</code>来进入MySQL，接着我们可以使用DDL语言来对数据库和表结构进行操作：</p>
 <p>查看所有数据库:<code>SHOW DATABASES;</code></p>
 <p>使用数据库:<code>USE 数据库名;</code>  (分号不能忘)</p>
@@ -746,137 +884,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/05/学习笔记《算法4th》-排序（一）/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Feng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Feng's blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/05/学习笔记《算法4th》-排序（一）/" itemprop="url">
-                  学习笔记《算法4th》 排序（一）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T16:49:51+08:00">
-                2016-12-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>以前经常在别人博客里看到他们总结的排序算法，最近在看《算法》第二章都是在讲排序，觉得自己也可以写一些总结来加深下理解，以后有些内容忘了也可以很快找出看看。  实现代码来自原书。</p>
-<p>按照算法的复杂度分为 1.简单排序：冒泡排序，简单选择排序，直接插入排序  2.改进排序：希尔排序，堆排序，归并排序，快速排序</p>
-<p>按照排序的方式又可分为：</p>
-<ul>
-<li>1.插入排序:直接插入排序、希尔排序。</li>
-<li>2.选择排序:直接选择排序、堆排序。</li>
-<li>3.交换排序:冒泡排序、快速排序。</li>
-<li>4.线性排序:计数排序、基数排序、桶排序;其中基数排序又叫桶排序。</li>
-<li>5.递归排序:归并排序。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/12/05/学习笔记《算法4th》-排序（一）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -924,7 +931,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
