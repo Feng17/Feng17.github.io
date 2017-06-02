@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些基本的知识点。
-正则表达式是用于匹配字符串中字符组合的模式。一">
+<meta name="description" content="最近在看一些防止xss攻击的文章，发现简单的操作可以使用JS再借助正则表达式来过滤输入，并且HTML5在&amp;lt;input&amp;gt;元素中新增了一些属性来限制用户输入，例如required属性表示输入不能为空，pattern属性里的值填入一个正则表达式可以匹配文本框中的值；&amp;lt;type&amp;gt;属性里也新增了几个值如”email”和”url”，表示输入要符合邮件格式和URL格式。
+第一次接触正则表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="正则表达式学习">
 <meta property="og:url" content="http://yoursite.com/2017/03/22/正则表达式/index.html">
 <meta property="og:site_name" content="Feng's blog">
-<meta property="og:description" content="最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些基本的知识点。
-正则表达式是用于匹配字符串中字符组合的模式。一">
-<meta property="og:updated_time" content="2017-05-15T05:13:06.278Z">
+<meta property="og:description" content="最近在看一些防止xss攻击的文章，发现简单的操作可以使用JS再借助正则表达式来过滤输入，并且HTML5在&amp;lt;input&amp;gt;元素中新增了一些属性来限制用户输入，例如required属性表示输入不能为空，pattern属性里的值填入一个正则表达式可以匹配文本框中的值；&amp;lt;type&amp;gt;属性里也新增了几个值如”email”和”url”，表示输入要符合邮件格式和URL格式。
+第一次接触正则表">
+<meta property="og:updated_time" content="2017-06-02T14:46:56.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式学习">
-<meta name="twitter:description" content="最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些基本的知识点。
-正则表达式是用于匹配字符串中字符组合的模式。一">
+<meta name="twitter:description" content="最近在看一些防止xss攻击的文章，发现简单的操作可以使用JS再借助正则表达式来过滤输入，并且HTML5在&amp;lt;input&amp;gt;元素中新增了一些属性来限制用户输入，例如required属性表示输入不能为空，pattern属性里的值填入一个正则表达式可以匹配文本框中的值；&amp;lt;type&amp;gt;属性里也新增了几个值如”email”和”url”，表示输入要符合邮件格式和URL格式。
+第一次接触正则表">
 
 
 
@@ -318,7 +318,8 @@
       
 
       
-        <p>最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些基本的知识点。</p>
+        <p>最近在看一些防止xss攻击的文章，发现简单的操作可以使用JS再借助正则表达式来过滤输入，并且HTML5在<code>&lt;input&gt;</code>元素中新增了一些属性来限制用户输入，例如<code>required</code>属性表示输入不能为空，<code>pattern</code>属性里的值填入一个正则表达式可以匹配文本框中的值；<code>&lt;type&gt;</code>属性里也新增了几个值如”email”和”url”，表示输入要符合邮件格式和URL格式。</p>
+<p>第一次接触正则表达式是在以前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次学习下正则表达式，主要总结正则表达式的一些基本的知识点。</p>
 <p>正则表达式是用于匹配字符串中字符组合的模式。一个正则表达式模式可以是由简单的字符所构成的，也可以是简单和特殊字符的组合。</p>
 <h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><ul>
 <li><p><code>.</code> ：匹配除换行符以外的任意字符。</p>
@@ -481,7 +482,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

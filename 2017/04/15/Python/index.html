@@ -95,7 +95,7 @@
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/14/59180ddea4252.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/13/591724b1a9a27.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/14/5918133fb2b1a.png">
-<meta property="og:updated_time" content="2017-05-15T05:12:09.062Z">
+<meta property="og:updated_time" content="2017-06-02T14:02:57.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬取v2ex上收藏的主题">
 <meta name="twitter:description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。
@@ -324,7 +324,7 @@
       
         <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。</p>
 <h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时间内登录就不需要再输入密码了。所以我们模拟登录时可以提交用户名和密码（但很可能被加密了，登录不上），也可以带cookie提交。</p>
-<p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的<a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py" target="_blank" rel="external">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。 <a id="more"></a></p>
+<p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的 <a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py" target="_blank" rel="external">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。 <a id="more"></a></p>
 <p>登录部分：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   headers = &#123;</div><div class="line">       <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like                          Gecko) Chrome/56.0.2924.76 Safari/537.36'</span>,   </div><div class="line">       <span class="string">'Referer'</span>: <span class="string">'https://v2ex.com/signin'</span>,</div><div class="line">       <span class="string">'Origin'</span>: <span class="string">'https://www.v2ex.com'</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   s = requests.Session()</div><div class="line">   s.headers.update(headers)</div><div class="line">   r = s.get(<span class="string">'https://v2ex.com/signin'</span>)</div><div class="line">   u, p = re.findall(<span class="string">r'class="sl" name="([0-9A-Za-z]&#123;64&#125;)"'</span>, r.text)</div><div class="line">   once_code = re.search(<span class="string">r'value="(\d+)" name="once"'</span>, r.text).group(<span class="number">1</span>)</div><div class="line">   </div><div class="line"><span class="comment">#也可以使用Beautiful Soup找到</span></div><div class="line"><span class="comment">#u = soup.find('input',placeholder="用户名或电子邮箱地址")['name'] 之前还有一个type="text"所以换个过滤</span></div><div class="line"><span class="comment">#p = soup.find('input',type="password")['name']</span></div><div class="line"><span class="comment">#once_code = soup.find('input', &#123;'name': 'once'&#125;)['value']</span></div><div class="line">  </div><div class="line">   data = &#123;</div><div class="line">       u: <span class="string">'填写用户名'</span>,</div><div class="line">       p: <span class="string">'填写密码'</span>,</div><div class="line">       <span class="string">'once'</span>: once_code,</div><div class="line">       <span class="string">'next'</span>: <span class="string">'/'</span>,</div><div class="line">   &#125;</div><div class="line">   r = s.post(<span class="string">'https://www.v2ex.com/signin'</span>,data)</div></pre></td></tr></table></figure></p>
 <p>登录页面代码：</p>
 <p><img src="https://ooo.0o0.ooo/2017/05/14/59180ddea4252.png" alt="20170514155605.png"></p>
@@ -333,7 +333,7 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">r = request.session.get(url)  获取url网页</div><div class="line">content = r.text </div><div class="line">soup = BeautifulSoup(content, &apos;lxml&apos;)</div></pre></td></tr></table></figure>
 <p> ‘lxml’ 是第三方解析器，需要安装<code>pip install lxml</code> ,lxml 解析器更加强大，速度更快，不用的话会使用默认的解析器。</p>
 <h4 id="分析网站的结构"><a href="#分析网站的结构" class="headerlink" title="分析网站的结构"></a>分析网站的结构</h4><p><img src="https://ooo.0o0.ooo/2017/05/13/591724b1a9a27.png" alt="20170513232156.png"></p>
-<p>我们发现所有的一个页面上所有主题的标题和他们的链接都在<code>&lt;span class=&quot;item_title&quot;&gt; &lt;/span&gt;</code> 这个标签里，我们可以使用方法<code>soup.find_all(class_=&quot;item_title&quot;)</code> 找到网页上所有class为item<em>title的标签，因为class是Python的关键字，所以用class</em>  ，接着我们用一个循环来找出每个标签里的标题和链接。  </p>
+<p>我们发现所有的一个页面上所有主题的标题和他们的链接都在<code>&lt;span class=&quot;item_title&quot;&gt; &lt;/span&gt;</code> 这个标签里，我们可以使用方法<code>soup.find_all(class_=&quot;item_title&quot;)</code> 找到网页上所有class为item<em>title的标签，因为class是Python的关键字，所以用`class</em>`  ，接着我们用一个循环来找出每个标签里的标题和链接。  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> soup.find_all(class_=<span class="string">"item_title"</span>):</div><div class="line">           getText = div.get_text()</div><div class="line">           getHref = div.a.get(<span class="string">'href'</span>)</div></pre></td></tr></table></figure>
 <p><code>getText = div.get_text()</code>表示遍历<code>class_=&quot;item_title&quot;</code>标签时得到标签里包含的文本内容  </p>
 <p><code>getHref = div.a.get(&#39;href&#39;)</code>表示遍历<code>class_=&quot;item_title&quot;</code>标签时找到<code>&lt;a&gt;</code>标签里的链接</p>
@@ -457,7 +457,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

@@ -241,6 +241,138 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/TrieNode/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/30/TrieNode/" itemprop="url">
+                  用字典树实现敏感词的替换
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-30T22:03:38+08:00">
+                2017-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>字典树，又称单词查找树或前缀树，是处理字符串的常见的数据结构，优点是利用字符串的公共前缀来节约存储空间从而最大限度地减少无谓的字符串比较，提高查找效率。</p>
+<p>字典树的基本性质：</p>
+<ol>
+<li>根节点不包含字符，除根节点外每一个节点都只包含一个字符。</li>
+<li>从根节点到某一节点，将路径上经过的字符连接起来，为扫过的对应的字符串。</li>
+<li>每个节点的所有子节点包含的字符都不相同。</li>
+</ol>
+<h4 id="字典树的构建"><a href="#字典树的构建" class="headerlink" title="字典树的构建"></a>字典树的构建</h4><p>如果要将一个单词加入字典树中,首先看单词的第一个字符在不在根节点下的第一层,如果没有,就新增一个节点并移动到该节点看它的孩子节点是不是有单词的第二个字符,如果没有就用同样的方法。</p>
+<p>搜索跟添加的步骤同理，从根节点开始搜索，取得要查找单词的第一个字符，如果没有就返回false，有的话在第一个字符下看能不能取到第二个字符，一直向下搜索，如果单词搜索完后，找到最后的一个字符是在添加时被我们标记为结尾的，说明字典树中含有这个单词，如果没有，说明单词不是字典树中添加过的单词。</p>
+<p>比如加入”abc” “ad” “be” “e”，构建出来的就是下面这个字典树，对每一个节点而言，从根节点到它的路径就是一个单词，如果该节点被<code>* *</code>标记则说明该单词存在。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/30/TrieNode/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/Spring Boot/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -458,7 +590,7 @@
         
           <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。</p>
 <h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时间内登录就不需要再输入密码了。所以我们模拟登录时可以提交用户名和密码（但很可能被加密了，登录不上），也可以带cookie提交。</p>
-<p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的<a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。
+<p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的 <a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/04/15/Python/#more" rel="contents">
@@ -581,7 +713,8 @@
 
       
         
-          <p>最近在看一些防止xss攻击的文章，发现简单的可以用正则表达式来替换一些符号，想起来第一次接触正则表达式是之前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次就系统的学习下正则表达式，主要总结正则表达式的一些基本的知识点。</p>
+          <p>最近在看一些防止xss攻击的文章，发现简单的操作可以使用JS再借助正则表达式来过滤输入，并且HTML5在<code>&lt;input&gt;</code>元素中新增了一些属性来限制用户输入，例如<code>required</code>属性表示输入不能为空，<code>pattern</code>属性里的值填入一个正则表达式可以匹配文本框中的值；<code>&lt;type&gt;</code>属性里也新增了几个值如”email”和”url”，表示输入要符合邮件格式和URL格式。</p>
+<p>第一次接触正则表达式是在以前学习爬虫的时候，当时是爬知乎里的一些图片，用的方法是在源代码里找到每张图片代码前后相同字符的部分然后用正则表达式进行匹配这些部分，但之前是跟着视频做的，并没有太了解正则表达式，这次学习下正则表达式，主要总结正则表达式的一些基本的知识点。</p>
 <p>正则表达式是用于匹配字符串中字符组合的模式。一个正则表达式模式可以是由简单的字符所构成的，也可以是简单和特殊字符的组合。</p>
 <h4 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h4><ul>
 <li><p><code>.</code> ：匹配除换行符以外的任意字符。</p>
@@ -720,136 +853,11 @@
       
         
           <p>在学生信息管理的例子中时，主页面应该是需要用户登录后才能查看的，但是用户可以在未登陆的时候在浏览器地址输入url直接访问，这里可以用过滤器来对用户请求进行统一认证即如果没有登录(session中获取不到用户信息)就全部转发到登录界面；并且可以同时在过滤器中设置编码转换，这样就不需要当请求里含有中文时都需要在提交到的Servlet中设置请求编码和响应编码问题。</p>
-<p>另外之前看到一个是视频讲到要对所有用户能输入的地方加以小心，例如我在测试时input里输入<code>&lt;script&gt;alert(&quot;hello&quot;)&lt;/script&gt;</code> 每次刷新的话都会弹出；如果对用户输入的类型不加以识别就会很不安全，上网搜了下发现可以使用过滤器对每个 post 请求的参数过滤一些关键字，替换成安全的；当然防范攻击的方式有很多不止使用过滤器，还可以在前端来进行防范。上次在论坛里也看到一个帖子也是关于前端和后端防范攻击讨论，这个以后需要好好了解下，这次就先总结下过滤器的一些知识吧。</p>
+<p>另外之前看到一个是视频讲到要对所有用户能输入的地方加以小心，例如我在测试时 <code>&lt;input&gt;</code>里输入<code>&lt;script&gt;alert(&quot;hello&quot;)&lt;/script&gt;</code> 每次刷新的话都会弹出；如果对用户输入的类型不加以识别就会很不安全，上网搜了下发现可以使用过滤器对每个 post 请求的参数过滤一些关键字，替换成安全的；当然防范攻击的方式有很多，可以在前端来进行防范。上次在论坛里也看到一个帖子也是关于前端和后端防范攻击讨论，这个以后需要好好了解下，这次就先总结下过滤器的一些知识吧。</p>
 <h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>过滤器主要用于对用户请求进行预处理，也可以对HttpServletResponse进行后处理，是个典型的处理链。使用Filter的完整流程是：Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对服务器响应进行后处理。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/16/过滤器Filter/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/17/寒假/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Feng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Feng's blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/17/寒假/" itemprop="url">
-                  寒假
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T20:51:58+08:00">
-                2017-02-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>寒假就要结束了，接下来就要进入大三下学期的生活，感觉时间过得很快。在这里写点东西，当做是寒假和上学期的总结，也记下点展望。</p>
-<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>2016年国庆放假时跟着教程用Hexo建了博客，之后试着在上面写了点东西，因为经常看别人博客里总结的知识，深感自己会的太少了，写技术类的博客自己的水平肯定是不够的，但我觉得可以写一点在学习路线上的笔记，而且以后也会面对笔试面试，一些经常要用到的知识可以自己整理下放到博客里，需要的的时候也可以再看看。</p>
-<h3 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h3><p>英语不管在什么专业上都是很重要的，寒假也坚持每天背单词，虽然去年通过了六级但跟周围小伙伴们相比分数还是不高的，打算下学期再报一次，另外上学期也报了英语竞赛，接下来也要准备一段时间，希望能拿个奖。其实感觉语言的学习没有捷径，最重要的是输入和输出量，并且输出大于输入，就像学学习编程，天天光看源码肯定学不精，还是要自己多动手。英语学习的话平时就应该坚持多看一些英语文章，听听新闻，碰到不会的单词就应该马上搞懂，觉得对自己有用的内容就可以记录下来；另外兴趣是最好的老师，可以看自己喜欢的美剧(做到逐渐放弃字幕) 自己喜欢书籍的英文版和国外的学习课程。我觉得Quora和VOA都是很不错的途径。总之语言学习就是个长期积累不断重复的过程 ，贵在坚持。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/17/寒假/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -928,7 +936,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
