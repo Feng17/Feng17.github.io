@@ -241,7 +241,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/TrieNode/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/TrieNode/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Feng">
@@ -266,8 +266,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/05/30/TrieNode/" itemprop="url">
-                  用字典树实现敏感词的替换
+                <a class="post-title-link" href="/2017/05/17/TrieNode/" itemprop="url">
+                  字典树
                 </a>
               
             
@@ -283,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-30T22:03:38+08:00">
-                2017-05-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-17T22:43:38+08:00">
+                2017-05-17
               </time>
             
 
@@ -327,148 +327,13 @@
 <li>从根节点到某一节点，将路径上经过的字符连接起来，为扫过的对应的字符串。</li>
 <li>每个节点的所有子节点包含的字符都不相同。</li>
 </ol>
-<h4 id="字典树的构建"><a href="#字典树的构建" class="headerlink" title="字典树的构建"></a>字典树的构建</h4><p>如果要将一个单词加入字典树中,首先看单词的第一个字符在不在根节点下的第一层,如果没有,就新增一个节点并移动到该节点看它的孩子节点是不是有单词的第二个字符,如果没有就用同样的方法。</p>
-<p>搜索跟添加的步骤同理，从根节点开始搜索，取得要查找单词的第一个字符，如果没有就返回false，有的话在第一个字符下看能不能取到第二个字符，一直向下搜索，如果单词搜索完后，找到最后的一个字符是在添加时被我们标记为结尾的，说明字典树中含有这个单词，如果没有，说明单词不是字典树中添加过的单词。</p>
-<p>比如加入”abc” “ad” “be” “e”，构建出来的就是下面这个字典树，对每一个节点而言，从根节点到它的路径就是一个单词，如果该节点被<code>* *</code>标记则说明该单词存在。
+<h4 id="字典树的实现"><a href="#字典树的实现" class="headerlink" title="字典树的实现"></a>字典树的实现</h4><p>添加：从左到右遍历要插入单词的每一个字符，从根节点下开始插入，若该字符存在，就不用插入新节点，并移动到该字符下继续插入下一字符，要是不存在，则插入新节点，并在新节点下继续插入下一字符，按照这样的方法进行添加操作，如果发现要插入的字符为单词的结尾，则标记下来。</p>
+<p>查询添加过的单词是否存在：搜索添加过的单词跟添加步骤同理，从根节点下开始搜索，看能不能找到要查找单词的第一个字符，如果没有就返回false，有的话在第一个字符下看能不能找到第二个字符，这样一直向下搜索；如果单词搜索完后，找到最后的一个字符对应的节点是在添加单词时被我们标记为结尾的，说明字典树中含有这个单词，如果没有，说明不是字典树中添加过的单词。</p>
+<p>返回以用户输入为前缀的所有单词：按照查询的方法依次读入输入的字符，节点不存在就返回null；对最后一个字符对应的节点进行深度优先遍历，遍历其子树中的所有节点，运用递归实现。如果在遍历过程中发现节点被标记为结束，就将此时的单词添加进列表中。</p>
+<p>比如加入 “你的名字”  “你的名片”  “你的书”  “你好”  “英语”  “好”，构建出来的就是下面这个字典树，对每一个节点而言，从根节点到它的路径就是一个单词，如果该节点被<code>* *</code>标记则说明该单词存在。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/30/TrieNode/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/17/Spring Boot/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Feng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Feng's blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/17/Spring Boot/" itemprop="url">
-                  Spring Boot快速搭建应用实现登录注册
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-17T23:18:38+08:00">
-                2017-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Spring Boot能够快速构建项目，很容易的创建一个独立运行的项目，可以不用或者只需要很少的Spring配置。这篇文章就记录下用Spring Boot快速搭建应用实现登陆注册功能过程中的一些知识点和逻辑。</p>
-<h4 id="Spring-Boot快速搭建"><a href="#Spring-Boot快速搭建" class="headerlink" title="Spring Boot快速搭建"></a>Spring Boot快速搭建</h4><p>在 <a href="http://start.spring.io">http://start.spring.io</a> 网站里，我们可以利用Maven作为构建方式来快速搭建我们的项目，在添加依赖里选择<code>Web</code> <code>Velocity</code> ，然后点击下载，解压后用IDEA打开pom.xml文件整个项目就加载起来了，如果项目以后需要导入哪个第三方jar包时可以直接在pom.xml文件中添加相关jar包依赖，Maven会根据dependency中的依赖配置，通过互联网在Maven中心库下载依赖包到本地。</p>
-<p>之前选择的<code>Web</code>会在Maven里依赖 <code>spring-boot-starter-web</code>，表示对Web项目开发的支持，为我们提供了嵌入的Tomcat以及Spring MVC的依赖；<code>Velocity</code> 依赖 <code>spring-boot-starter-velocity</code>表示对Velocity模板引擎的支持。</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><ul>
-<li>controller：控制器(SpringMVC注解@Controller的类)，引用srivce层来控制业务流程。</li>
-<li>dao：数据库访问层，Data Access Objiect(数据访问对象)， 数据库访问对象的第一个面向对象的接口，操作数据库  （增删改查）。</li>
-<li>service：业务层， 建立在Dao数据库访问层之上，引用对应的Dao层数据库操作。</li>
-<li><p>model：数据模型，对应数据库表的实体类和数据库表的字段是基本对应的。</p>
-</li>
-<li><p>view：视图页面 包含jsp,Velocity,Thymeleaf等。</p>
-</li>
-<li>util：工具类。</li>
-<li>static：可以用来存放静态资源。</li>
-<li>templates：用来存放默认的模板配置路径。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/17/Spring Boot/#more" rel="contents">
+            <a class="btn" href="/2017/05/17/TrieNode/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -889,6 +754,131 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/17/寒假/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/17/寒假/" itemprop="url">
+                  寒假
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T20:51:58+08:00">
+                2017-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>寒假就要结束了，接下来就要进入大三下学期的生活，感觉时间过得很快。在这里写点东西，当做是寒假和上学期的总结，也记下点展望。</p>
+<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>2016年国庆放假时跟着教程用Hexo建了博客，之后试着在上面写了点东西，因为经常看别人博客里总结的知识，深感自己会的太少了，写技术类的博客自己的水平肯定是不够的，但我觉得可以写一点在学习路线上的笔记，而且以后也会面对笔试面试，一些经常要用到的知识可以自己整理下放到博客里，需要的的时候也可以再看看。</p>
+<h3 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h3><p>英语不管在什么专业上都是很重要的，寒假也坚持每天背单词，虽然去年通过了六级但跟周围小伙伴们相比分数还是不高的，打算下学期再报一次，另外上学期也报了英语竞赛，接下来也要准备一段时间，希望能拿个奖。其实感觉语言的学习没有捷径，最重要的是输入和输出量，并且输出大于输入，就像学学习编程，天天光看源码肯定学不精，还是要自己多动手。英语学习的话平时就应该坚持多看一些英语文章，听听新闻，碰到不会的单词就应该马上搞懂，觉得对自己有用的内容就可以记录下来；另外兴趣是最好的老师，可以看自己喜欢的美剧(做到逐渐放弃字幕) 自己喜欢书籍的英文版和国外的学习课程。我觉得Quora和VOA都是很不错的途径。总之语言学习就是个长期积累不断重复的过程 ，贵在坚持。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/17/寒假/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -936,7 +926,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
