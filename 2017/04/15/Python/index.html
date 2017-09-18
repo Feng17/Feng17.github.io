@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。
-模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时">
+<meta name="description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。之前看过别人的爬虫教程是以爬取糗事百科为例爬取上面的段子，这次跟着作者的思路自己实现下，大致步骤差不多，用到了request和Beautiful Soup两个模块，实现很简单。
+模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python爬取v2ex上收藏的主题">
+<meta property="og:title" content="Python爬虫">
 <meta property="og:url" content="http://yoursite.com/2017/04/15/Python/index.html">
 <meta property="og:site_name" content="Feng's blog">
-<meta property="og:description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。
-模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时">
+<meta property="og:description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。之前看过别人的爬虫教程是以爬取糗事百科为例爬取上面的段子，这次跟着作者的思路自己实现下，大致步骤差不多，用到了request和Beautiful Soup两个模块，实现很简单。
+模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/14/59180ddea4252.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/13/591724b1a9a27.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/05/14/5918133fb2b1a.png">
-<meta property="og:updated_time" content="2017-06-02T14:02:57.404Z">
+<meta property="og:updated_time" content="2017-09-18T07:45:04.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python爬取v2ex上收藏的主题">
-<meta name="twitter:description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。
-模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时">
+<meta name="twitter:title" content="Python爬虫">
+<meta name="twitter:description" content="之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。之前看过别人的爬虫教程是以爬取糗事百科为例爬取上面的段子，这次跟着作者的思路自己实现下，大致步骤差不多，用到了request和Beautiful Soup两个模块，实现很简单。
+模拟登录当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或">
 <meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/14/59180ddea4252.png">
 
 
@@ -134,7 +134,7 @@
 
 
 
-  <title> Python爬取v2ex上收藏的主题 | Feng's blog </title>
+  <title> Python爬虫 | Feng's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +271,7 @@
             
             
               
-                Python爬取v2ex上收藏的主题
+                Python爬虫
               
             
           </h1>
@@ -322,10 +322,10 @@
       
 
       
-        <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。</p>
-<h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时间内登录就不需要再输入密码了。所以我们模拟登录时可以提交用户名和密码（但很可能被加密了，登录不上），也可以带cookie提交。</p>
+        <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。之前看过别人的<a href="http://www.jianshu.com/p/9c266216957b" target="_blank" rel="external">爬虫教程</a>是以爬取糗事百科为例爬取上面的段子，这次跟着作者的思路自己实现下，大致步骤差不多，用到了request和Beautiful Soup两个模块，实现很简单。</p>
+<h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中。所以我们模拟登录时可以提交用户名和密码，也可以带cookie提交。</p>
 <p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的 <a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py" target="_blank" rel="external">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。 <a id="more"></a></p>
-<p>登录部分：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   headers = &#123;</div><div class="line">       <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like                          Gecko) Chrome/56.0.2924.76 Safari/537.36'</span>,   </div><div class="line">       <span class="string">'Referer'</span>: <span class="string">'https://v2ex.com/signin'</span>,</div><div class="line">       <span class="string">'Origin'</span>: <span class="string">'https://www.v2ex.com'</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   s = requests.Session()</div><div class="line">   s.headers.update(headers)</div><div class="line">   r = s.get(<span class="string">'https://v2ex.com/signin'</span>)</div><div class="line">   u, p = re.findall(<span class="string">r'class="sl" name="([0-9A-Za-z]&#123;64&#125;)"'</span>, r.text)</div><div class="line">   once_code = re.search(<span class="string">r'value="(\d+)" name="once"'</span>, r.text).group(<span class="number">1</span>)</div><div class="line">   </div><div class="line"><span class="comment">#也可以使用Beautiful Soup找到</span></div><div class="line"><span class="comment">#u = soup.find('input',placeholder="用户名或电子邮箱地址")['name'] 之前还有一个type="text"所以换个过滤</span></div><div class="line"><span class="comment">#p = soup.find('input',type="password")['name']</span></div><div class="line"><span class="comment">#once_code = soup.find('input', &#123;'name': 'once'&#125;)['value']</span></div><div class="line">  </div><div class="line">   data = &#123;</div><div class="line">       u: <span class="string">'填写用户名'</span>,</div><div class="line">       p: <span class="string">'填写密码'</span>,</div><div class="line">       <span class="string">'once'</span>: once_code,</div><div class="line">       <span class="string">'next'</span>: <span class="string">'/'</span>,</div><div class="line">   &#125;</div><div class="line">   r = s.post(<span class="string">'https://www.v2ex.com/signin'</span>,data)</div></pre></td></tr></table></figure></p>
+<p>登录部分：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   headers = &#123;</div><div class="line">       <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like                          Gecko) Chrome/56.0.2924.76 Safari/537.36'</span>,   </div><div class="line">       <span class="string">'Referer'</span>: <span class="string">'https://v2ex.com/signin'</span>,</div><div class="line">       <span class="string">'Origin'</span>: <span class="string">'https://www.v2ex.com'</span></div><div class="line">   &#125;</div><div class="line"></div><div class="line">   s = requests.Session()</div><div class="line">   s.headers.update(headers)</div><div class="line">   r = s.get(<span class="string">'https://v2ex.com/signin'</span>)</div><div class="line">   u, p = re.findall(<span class="string">r'class="sl" name="([0-9A-Za-z]&#123;64&#125;)"'</span>, r.text)</div><div class="line">   once_code = re.search(<span class="string">r'value="(\d+)" name="once"'</span>, r.text).group(<span class="number">1</span>)</div><div class="line">   </div><div class="line"><span class="comment">#也可以使用Beautiful Soup找到</span></div><div class="line"><span class="comment">#u = soup.find('input',placeholder="用户名或电子邮箱地址")['name'] 之前还有一个type="text"所以换个过滤</span></div><div class="line"><span class="comment">#p = soup.find('input',type="password")['name']</span></div><div class="line"><span class="comment">#once_code = soup.find('input', &#123;'name': 'once'&#125;)['value']</span></div><div class="line">  </div><div class="line">   data = &#123;</div><div class="line">       u: <span class="string">'填写你的用户名'</span>,</div><div class="line">       p: <span class="string">'填写你的密码'</span>,</div><div class="line">       <span class="string">'once'</span>: once_code,</div><div class="line">       <span class="string">'next'</span>: <span class="string">'/'</span>,</div><div class="line">   &#125;</div><div class="line">   r = s.post(<span class="string">'https://www.v2ex.com/signin'</span>,data)</div></pre></td></tr></table></figure></p>
 <p>登录页面代码：</p>
 <p><img src="https://ooo.0o0.ooo/2017/05/14/59180ddea4252.png" alt="20170514155605.png"></p>
 <h4 id="request"><a href="#request" class="headerlink" title="request"></a>request</h4><p>request是一个非常方便的Python HTTP库，常用方法 requests.get()：可以获取HTML网页，对应于HTTP的GET；requests.post()：向HTML网页提交POST请求的方法，对应于HTTP的POST；<br>requests.Session()能够跨请求地保持某些参数，例如可以将浏览过程中的cookies保存下来。</p>
@@ -338,17 +338,12 @@
 <p><code>getText = div.get_text()</code>表示遍历<code>class_=&quot;item_title&quot;</code>标签时得到标签里包含的文本内容  </p>
 <p><code>getHref = div.a.get(&#39;href&#39;)</code>表示遍历<code>class_=&quot;item_title&quot;</code>标签时找到<code>&lt;a&gt;</code>标签里的链接</p>
 <h4 id="爬取"><a href="#爬取" class="headerlink" title="爬取"></a>爬取</h4><p>用一个循环设置要爬取的页数，开始爬取</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">'https://www.v2ex.com/my/topics?p='</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">26</span>):</div><div class="line">        new_url = url+str(i)</div><div class="line">        print(<span class="string">'正在写入第'</span>+str(i)+<span class="string">'页'</span>)</div><div class="line">        r = s.get(new_url)</div><div class="line">        content = r.text</div><div class="line">        soup = BeautifulSoup(content, <span class="string">'lxml'</span>)</div><div class="line">        <span class="keyword">for</span> div <span class="keyword">in</span> soup.find_all(class_=<span class="string">"item_title"</span>):</div><div class="line">            getText = div.get_text()</div><div class="line">            getHref = div.a.get(<span class="string">'href'</span>)</div><div class="line">            href = <span class="string">'https://www.v2ex.com'</span>+getHref</div><div class="line">            mark = getText + <span class="string">' '</span> + href</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'bookmarks.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</div><div class="line">                f.write(mark+<span class="string">'\n\n'</span>)</div><div class="line">        time.sleep(<span class="number">10</span>)</div></pre></td></tr></table></figure>
-<p>在爬取过程中发现在写入第11页时报错：<br><code>UnicodeEncodeError: &#39;gbk&#39; codec can&#39;t encode character: illegal multibyte sequence</code><br>然后看了下已经爬到的主题再去网站上看了下发现第11页有个主题标题里有emoji表情，emoji是Unicode码，在IDE控制台里打印没有问题，但写入文件报错，于是上网搜了下解决办法，编码设置为支持Unicode字符的编码。   <a href="http://stackoverflow.com/questions/3218014/unicodeencodeerror-gbk-codec-cant-encode-character-illegal-multibyte-sequen" target="_blank" rel="external">原答案</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">url = <span class="string">'https://www.v2ex.com/my/topics?p='</span></div><div class="line">   <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">26</span>):</div><div class="line">       new_url = url + str(i)</div><div class="line">       print(<span class="string">'正在写入第'</span> + str(i) + <span class="string">'页'</span>)</div><div class="line">       r = s.get(new_url)</div><div class="line">       content = r.text</div><div class="line">       soup = BeautifulSoup(content, <span class="string">'lxml'</span>)</div><div class="line">       <span class="keyword">for</span> div <span class="keyword">in</span> soup.find_all(class_=<span class="string">"item_title"</span>):</div><div class="line">           getText = div.get_text()</div><div class="line">           getHref = div.a.get(<span class="string">'href'</span>)</div><div class="line">           href = <span class="string">'https://www.v2ex.com'</span> + getHref</div><div class="line">           mark = getText + <span class="string">' '</span> + href</div><div class="line">           <span class="keyword">with</span> open(<span class="string">'bookmarks.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</div><div class="line">               f.write(mark + <span class="string">'\n\n'</span>)</div><div class="line">       time.sleep(<span class="number">10</span>)</div></pre></td></tr></table></figure>
+<p>在爬取过程中发现在写入第11页时报错：<br><code>UnicodeEncodeError: &#39;gbk&#39; codec can&#39;t encode character: illegal multibyte sequence</code><br>然后看了下已经爬到的主题再去网站上看了下发现第11页有个主题标题里有emoji表情，emoji是Unicode码，在IDE控制台里打印没有问题，但写入文件报错，于是上网搜了下解决办法，编码设置为支持Unicode字符的编码。  <a href="http://stackoverflow.com/questions/3218014/unicodeencodeerror-gbk-codec-cant-encode-character-illegal-multibyte-sequen" target="_blank" rel="external">原答案</a></p>
 <p>写入后的文件：</p>
 <p><img src="https://ooo.0o0.ooo/2017/05/14/5918133fb2b1a.png" alt="20170514162002.png"></p>
-<p>参考:</p>
-<p>v2ex网站签到：<a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py" target="_blank" rel="external">https://github.com/bonfy/qiandao/blob/master/v2ex.py</a></p>
-<p>更多资料：</p>
-<p>request中文文档：<a href="http://docs.python-requests.org/zh_CN/latest/" target="_blank" rel="external">http://docs.python-requests.org/zh_CN/latest/</a></p>
-<p>Beautiful Soup中文文档：<a href="http://docs.python-requests.org/zh_CN/latest/" target="_blank" rel="external">http://docs.python-requests.org/zh_CN/latest/</a>    </p>
-<p><a href="http://cuiqingcai.com/" target="_blank" rel="external">静觅</a> » <a href="http://cuiqingcai.com/1319.html" target="_blank" rel="external">Python爬虫利器二之Beautiful Soup的用法</a></p>
-<p>关于编码的一些答案：<a href="https://www.zhihu.com/question/31833164" target="_blank" rel="external">https://www.zhihu.com/question/31833164</a> </p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>v2ex网站签到：<a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py" target="_blank" rel="external">https://github.com/bonfy/qiandao/blob/master/v2ex.py</a></p>
+<p>【爬虫其实很简单】requests 与 beautiful soup基础入门：<a href="http://www.jianshu.com/p/9c266216957b" target="_blank" rel="external">http://www.jianshu.com/p/9c266216957b</a></p>
 
       
     </div>
@@ -457,7 +452,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -525,7 +520,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模拟登录"><span class="nav-number">1.</span> <span class="nav-text">模拟登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#request"><span class="nav-number">2.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Beautiful-Soup"><span class="nav-number">3.</span> <span class="nav-text">Beautiful Soup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析网站的结构"><span class="nav-number">4.</span> <span class="nav-text">分析网站的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爬取"><span class="nav-number">5.</span> <span class="nav-text">爬取</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模拟登录"><span class="nav-number">1.</span> <span class="nav-text">模拟登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#request"><span class="nav-number">2.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Beautiful-Soup"><span class="nav-number">3.</span> <span class="nav-text">Beautiful Soup</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析网站的结构"><span class="nav-number">4.</span> <span class="nav-text">分析网站的结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爬取"><span class="nav-number">5.</span> <span class="nav-text">爬取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

@@ -241,138 +241,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/JDBC/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Feng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Feng's blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/11/JDBC/" itemprop="url">
-                  JDBC
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T22:34:24+08:00">
-                2017-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。这次通过简单的学生信息管理的例子来总结下JDBC的一些知识和SQL的一些基本语句。</p>
-<p>使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最后我们需要关闭数据库连接、语句和结果集(关闭资源时采用倒关的手法)。看上去挺麻烦的，还需要捕获SQLException，不过最近看到其他书上写的之后学习了Spring后可以使用Spring的JdbcTemplate来进行操作避免JDBC的样板式代码，这个在之后框架再好好学习下。</p>
-<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序;</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.或得数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(url, user, password);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String url = <span class="string">"jdbc:mysql://localhost:3306/数据库名称"</span>; <span class="comment">//url格式</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
-<h3 id="SQL的一些知识"><a href="#SQL的一些知识" class="headerlink" title="SQL的一些知识"></a>SQL的一些知识</h3><h4 id="DDL语法"><a href="#DDL语法" class="headerlink" title="DDL语法"></a>DDL语法</h4><p>在命令行中输入<code>mysql -uroot -p</code>来进入MySQL，接着我们可以使用DDL语言来对数据库和表结构进行操作：</p>
-<p>查看所有数据库:<code>SHOW DATABASES;</code></p>
-<p>使用数据库:<code>USE 数据库名;</code>  (分号不能忘)</p>
-<p>在数据库中新建表，例如新建学生信息的表：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</div><div class="line">	<span class="keyword">id</span> <span class="built_in">INT</span> PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT, </div><div class="line">	<span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">	age <span class="built_in">INT</span>,</div><div class="line">	sex  <span class="built_in">VARCHAR</span>(<span class="number">3</span>),</div><div class="line">	id_number <span class="built_in">VARCHAR</span>(<span class="number">20</span>)</div><div class="line">	);</div></pre></td></tr></table></figure>
-<h5 id="SQL数据中的属性类型"><a href="#SQL数据中的属性类型" class="headerlink" title="SQL数据中的属性类型"></a>SQL数据中的属性类型</h5><ul>
-<li><p>int:4字节，整型,大整数值。tinyint:1字节,小整数值。  smallint:2字节，大整数值。  也可以加上unsigned关键字，定义成无符号的类型。
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/11/JDBC/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/08/学习笔记《算法4th》-排序（二）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -715,14 +583,15 @@
 
       
         
-          <h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
-<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
-<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>我们如果要上传或下载代码，肯定本地Git仓库要与我们在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以我们要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
-<p>执行后我们会在用户主目录下可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样我们本地就可以与远端GitHub建立联系了。为什么GitHub需要SSH Key因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是你输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
+          <p>记录下Git的一些基础知识，内容主要来自<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰的Git教程</a> </p>
+<h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。如果在本地新建一个目录并用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
+<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里，可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
+<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>如果要上传或下载代码，本地Git仓库要与在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
+<p>执行后可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样本地就可以与远端GitHub建立联系了。GitHub需要SSH Key是因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
 <h3 id="Git仓库"><a href="#Git仓库" class="headerlink" title="Git仓库"></a>Git仓库</h3><p>打开命令行终端，进入项目所在的本地目录，将目录初始化为一个 Git 项目</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
-<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。
+<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是<code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向最后一次提交的结果。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/11/03/Git基本操作/#more" rel="contents">
@@ -893,6 +762,142 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/02/Markdown/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Feng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://ww1.sinaimg.cn/mw690/005QwhYAgw1fblleaj4z8j308h08jwgb.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Feng's blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Feng's blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/02/Markdown/" itemprop="url">
+                  MarkDown
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-02T01:19:58+08:00">
+                2016-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> 记录一下常用的MarkDown语法，编辑器使用Typora。</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">### 三级标题</div><div class="line">#### 四级标题</div></pre></td></tr></table></figure>
+<p>Markdown：</p>
+<h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; 1</div><div class="line">&gt; 2</div></pre></td></tr></table></figure>
+<p>Markdown：</p>
+<blockquote>
+<p>1<br>2</p>
+</blockquote>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- *斜体*</div><div class="line">- **粗体**</div></pre></td></tr></table></figure>
+<p>Markdown：</p>
+<ul>
+<li><em>斜体</em></li>
+<li><strong>粗体</strong></li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/02/Markdown/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -940,7 +945,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

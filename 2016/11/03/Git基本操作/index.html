@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="Git与GithubGit是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
-Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。
-本地 Git 项目与远程的 GitHub 建立联系我">
+<meta name="description" content="记录下Git的一些基础知识，内容主要来自廖雪峰的Git教程 
+Git与GithubGit是分布式版本控制系统。如果在本地新建一个目录并用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
+Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里，可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git基本操作">
 <meta property="og:url" content="http://yoursite.com/2016/11/03/Git基本操作/index.html">
 <meta property="og:site_name" content="Feng's blog">
-<meta property="og:description" content="Git与GithubGit是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
-Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。
-本地 Git 项目与远程的 GitHub 建立联系我">
-<meta property="og:updated_time" content="2017-04-07T13:12:09.834Z">
+<meta property="og:description" content="记录下Git的一些基础知识，内容主要来自廖雪峰的Git教程 
+Git与GithubGit是分布式版本控制系统。如果在本地新建一个目录并用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
+Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里，可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。">
+<meta property="og:updated_time" content="2017-09-17T13:18:07.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git基本操作">
-<meta name="twitter:description" content="Git与GithubGit是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
-Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。
-本地 Git 项目与远程的 GitHub 建立联系我">
+<meta name="twitter:description" content="记录下Git的一些基础知识，内容主要来自廖雪峰的Git教程 
+Git与GithubGit是分布式版本控制系统。如果在本地新建一个目录并用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。
+Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里，可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。">
 
 
 
@@ -321,39 +321,41 @@ Github 是现在广泛流行的代码托管平台，很多开源项目都把代�
       
 
       
-        <h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。我们可以在本地新建一个目录，用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
-<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里。我们可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
-<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>我们如果要上传或下载代码，肯定本地Git仓库要与我们在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以我们要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
-<p>执行后我们会在用户主目录下可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样我们本地就可以与远端GitHub建立联系了。为什么GitHub需要SSH Key因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是你输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
+        <p>记录下Git的一些基础知识，内容主要来自<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a> </p>
+<h3 id="Git与Github"><a href="#Git与Github" class="headerlink" title="Git与Github"></a>Git与Github</h3><p>Git是分布式版本控制系统。如果在本地新建一个目录并用git命令初始化后这个目录里面的所有文件都可以被Git管理起来，每个文件的修改，添加或删除，Git都能够查看到。</p>
+<p>Github 是现在广泛流行的代码托管平台，很多开源项目都把代码放在这里，可以使用git命令上传修改代码或者将别人放在GitHub上的代码克隆到本地。</p>
+<h3 id="本地-Git-项目与远程的-GitHub-建立联系"><a href="#本地-Git-项目与远程的-GitHub-建立联系" class="headerlink" title="本地 Git 项目与远程的 GitHub 建立联系"></a>本地 Git 项目与远程的 GitHub 建立联系</h3><p>如果要上传或下载代码，本地Git仓库要与在GitHub上的仓库建立联系，二者之间的传输是SSH加密的，所以要创建SSH Key。<br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></div></pre></td></tr></table></figure></p>
+<p>执行后可以在用户主目录里找到<code>.ssh</code>目录，里面有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code>id_rsa</code>是私钥，不能泄露出去，<code>id_rsa.pub</code>是公钥，可以放心地告诉任何人。接着在Github设置里将<code>id_rsa.pub</code>文件的内容粘贴进SSH Keys里，这样本地就可以与远端GitHub建立联系了。GitHub需要SSH Key是因为GitHub需要识别出你的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h4 id="GitHub-for-Windows"><a href="#GitHub-for-Windows" class="headerlink" title="GitHub for Windows"></a>GitHub for Windows</h4><p>我第一次使用git时使用了较为简单的操作，下载了<a href="https://desktop.github.com/" target="_blank" rel="external">GitHub for Windows</a> 安装后桌面上会有2个图标，一个是GitHub的图形化客户端，另一个是Git Shell。图形化客户端可以代替一些git命令的操作，当第一次登陆GitHub的图形化客户端时我们会输入昵称和邮箱，客户端就会帮我们填写的配置成git的全局配置，并且此时我们填写的邮箱也会收到GitHub发来的邮件表示一个SSH Key添加进我们的账户。Shell是linux/Unix系统的外壳，也可以理解为命令行入口，就是输入并执行命令行的地方，常用的bash是Shell的一种，Git Shell打开默认是Power Shell,可以在GitHub图形化客户端的Options选项里修改为Git Bash或Cmd,Options里也可以修改我们的Git全局配置。</p>
 <h3 id="Git仓库"><a href="#Git仓库" class="headerlink" title="Git仓库"></a>Git仓库</h3><p>打开命令行终端，进入项目所在的本地目录，将目录初始化为一个 Git 项目</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
-<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是你的 <code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向你最后一次提交的结果。<a id="more"></a></p>
+<p>此时会在目录中创建一个 .git 隐藏文件夹,以 <strong>. </strong>开头的文件都是隐藏文件可以使用<code>ls -a</code> 命令查看隐藏文件。本地仓库由 git 维护的三棵“树”组成。第一个是<code>工作目录</code>，它持有实际文件；第二个是 <code>暂存区（Index）</code>，它像个缓存区域，临时保存你的改动；最后是 <code>HEAD</code>，它指向最后一次提交的结果。<a id="more"></a></p>
 <h4 id="文件操作常用命令"><a href="#文件操作常用命令" class="headerlink" title="文件操作常用命令"></a>文件操作常用命令</h4><p><code>ls -a</code>  命令查看隐藏文件     <code>pwd</code> 获取当前路径   <code>cd ..</code> 返回上一级目录   <code>cd ~</code> 返回’home’目录 </p>
 <p><code>mv 源目录文件 目的目录</code> 移动文件 <code>cat test.txt</code> 查看test文本文件 <code>cp test family</code> 复制test文件到family目录中</p>
 <p><code>touch test</code> 创建test空白文件   <code>rm test</code> 删除test文件   <code>mkdir family</code> 新建family目录 </p>
 <h3 id="添加和提交到仓库"><a href="#添加和提交到仓库" class="headerlink" title="添加和提交到仓库"></a>添加和提交到仓库</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add</div></pre></td></tr></table></figure>
-<p>放进新的Git仓库(把它们添加到暂存区) 可以添加多个文件 也可用命令 <code>git add -A</code> 添加所有文件</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m<span class="string">"代码提交说明"</span></div></pre></td></tr></table></figure>
-<p>将代码提交到仓库，此时改动已经提交到了HEAD。若有修改<code>git status</code>命令可以让我们时刻掌握仓库当前的状态，是否被修改过。              </p>
-<p> <code>git diff</code> 命令可以查看修改内容。</p>
+<p>放进新的Git仓库(把它们添加到暂存区) 可以添加多个文件 </p>
+<p> <code>git add -A</code>  提交所有变化</p>
+<p><code>git add -u</code> 提交被修改和被删除文件，不包括新文件</p>
+<p><code>git add .</code>  提交新文件和被修改文件，不包括被删除文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">"代码提交说明"</span></div></pre></td></tr></table></figure>
+<p>将代码提交到仓库，此时改动已经提交到了HEAD。若有修改<code>git status</code>命令可以时刻掌握仓库当前的状态，是否被修改过。              </p>
 <h3 id="关联到远程仓库"><a href="#关联到远程仓库" class="headerlink" title="关联到远程仓库"></a>关联到远程仓库</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin  https://github.com/***/*** （仓库的地址）</div></pre></td></tr></table></figure>
 <h3 id="推送到github仓库"><a href="#推送到github仓库" class="headerlink" title="推送到github仓库"></a>推送到github仓库</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
-<p>本地<code>master</code>分支的最新修改推送至GitHub,也可以把 master 换成你想要推送的任何分支。</p>
+<p>本地<code>master</code>分支的最新修改推送至GitHub,也可以把 master 换成想要推送的任何分支。</p>
 <p>以上基本的将本地项目提交到远端的操作就完成了。</p>
-<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>你创建仓库的时候，<code>master</code>是默认的分支。在其他分支上进行开发，完成后再将它们合并到主分支上。每次提交，<code>master</code>分支都会向前移动一步，当我们创建新的分支如<code>dev</code>后对工作区的修改和提交就是针对<code>dev</code>分支了，比如新提交一次后，<code>dev</code>指针往前移动一步，而<code>master</code>指针不变。</p>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>创建仓库的时候，<code>master</code>是默认的分支。在其他分支上进行开发，完成后再将它们合并到主分支上。每次提交，<code>master</code>分支都会向前移动一步，当创建新的分支如<code>dev</code>后对工作区的修改和提交就是针对<code>dev</code>分支了，比如新提交一次后，<code>dev</code>指针往前移动一步，而<code>master</code>指针不变。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b dev</div></pre></td></tr></table></figure>
-<p><code>git checkout</code>命令加上<code>-b</code>参数表示创建并切换到dev分支。<code>git branch</code>命令会列出所有分支，当前分支前面会标一个<code>*</code>号。我们可以在dev分支上进行修改并提交到仓库。除非你将分支推送到远端仓库，不然该分支就不为他人所见<code>git push origin &lt;branch&gt;</code></p>
+<p><code>git checkout</code>命令加上<code>-b</code>参数表示创建并切换到dev分支。<code>git branch</code>命令会列出所有分支，当前分支前面会标一个<code>*</code>号。可以在dev分支上进行修改并提交到仓库。除非将分支推送到远端仓库，不然该分支就不为他人所见<code>git push origin &lt;branch&gt;</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout master</div></pre></td></tr></table></figure>
-<p>若此时我们切换到<code>master</code>主分支刚才我们在dev分支上进行的所有操作将都不见了。</p>
+<p>若此时切换到<code>master</code>主分支那么刚才在dev分支上进行的所有操作将都不见了。</p>
 <h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge dev</div></pre></td></tr></table></figure>
-<p>将<code>dev</code>分支的工作成果合并到<code>master</code>分支上，此时在查看文件会发现我们所修改的内容重新出现了。</p>
+<p>将<code>dev</code>分支的工作成果合并到<code>master</code>分支上，此时在查看文件会发现所修改的内容重新出现了。</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d dev</div></pre></td></tr></table></figure>
 <p>合并完成后，就可以放心地删除<code>dev</code>分支了。</p>
-<p>git 会尝试去自动合并改动。但可能并非每次都成功，并可能出现冲突（conflicts）。 这时候就需要修改这些文件来手动合并这些冲突。改完之后，你需要执行<code>git add &lt;file name&gt;</code>以将它们标记为合并成功。</p>
-<p>在实际开发中应该充分利用分支，<code>master</code>分支应该是非常稳定，在<code>dev</code>分支上进行开发，并不断可以将<code>dev</code>分支合并到<code>master</code>上。</p>
-<p>参考:  <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>           <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git-简明指南</a></p>
-<p>进阶:  <a href="https://book.git-scm.com/book/zh/v2" target="_blank" rel="external">Pro Git</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h3><p> <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>    </p>
+<p> <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">git-简明指南</a></p>
+<p>更多:  <a href="https://book.git-scm.com/book/zh/v2" target="_blank" rel="external">Pro Git</a></p>
 
       
     </div>
@@ -462,7 +464,7 @@ Github 是现在广泛流行的代码托管平台，很多开源项目都把代�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -530,7 +532,7 @@ Github 是现在广泛流行的代码托管平台，很多开源项目都把代�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与Github"><span class="nav-number">1.</span> <span class="nav-text">Git与Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地-Git-项目与远程的-GitHub-建立联系"><span class="nav-number">2.</span> <span class="nav-text">本地 Git 项目与远程的 GitHub 建立联系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub-for-Windows"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub for Windows</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git仓库"><span class="nav-number">3.</span> <span class="nav-text">Git仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作常用命令"><span class="nav-number">3.1.</span> <span class="nav-text">文件操作常用命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加和提交到仓库"><span class="nav-number">4.</span> <span class="nav-text">添加和提交到仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联到远程仓库"><span class="nav-number">5.</span> <span class="nav-text">关联到远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推送到github仓库"><span class="nav-number">6.</span> <span class="nav-text">推送到github仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">7.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#合并分支"><span class="nav-number">7.1.</span> <span class="nav-text">合并分支</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git与Github"><span class="nav-number">1.</span> <span class="nav-text">Git与Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地-Git-项目与远程的-GitHub-建立联系"><span class="nav-number">2.</span> <span class="nav-text">本地 Git 项目与远程的 GitHub 建立联系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub-for-Windows"><span class="nav-number">2.1.</span> <span class="nav-text">GitHub for Windows</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git仓库"><span class="nav-number">3.</span> <span class="nav-text">Git仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作常用命令"><span class="nav-number">3.1.</span> <span class="nav-text">文件操作常用命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加和提交到仓库"><span class="nav-number">4.</span> <span class="nav-text">添加和提交到仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联到远程仓库"><span class="nav-number">5.</span> <span class="nav-text">关联到远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推送到github仓库"><span class="nav-number">6.</span> <span class="nav-text">推送到github仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">7.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#合并分支"><span class="nav-number">7.1.</span> <span class="nav-text">合并分支</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考:</span></a></li></ol></div>
             
 
           </div>

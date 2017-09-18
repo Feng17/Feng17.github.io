@@ -400,7 +400,7 @@
               
                 
                 <a class="post-title-link" href="/2017/04/15/Python/" itemprop="url">
-                  Python爬取v2ex上收藏的主题
+                  Python爬虫
                 </a>
               
             
@@ -453,8 +453,8 @@
 
       
         
-          <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。用到了request和Beautiful Soup两个模块，实现很简单，比较新手。</p>
-<h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中，下次在一定时间内登录就不需要再输入密码了。所以我们模拟登录时可以提交用户名和密码（但很可能被加密了，登录不上），也可以带cookie提交。</p>
+          <p>之前上v2ex发现自己收藏的帖子已经有500个了，于是想用爬虫将这些主题的标题和链接保存到本地，防止以后忘了或者一些原因登录不上。之前看过别人的<a href="http://www.jianshu.com/p/9c266216957b">爬虫教程</a>是以爬取糗事百科为例爬取上面的段子，这次跟着作者的思路自己实现下，大致步骤差不多，用到了request和Beautiful Soup两个模块，实现很简单。</p>
+<h4 id="模拟登录"><a href="#模拟登录" class="headerlink" title="模拟登录"></a>模拟登录</h4><p>当我们登录一个网站时服务器首先要验证用户名和密码，然后服务器会下发一个token(或者是sessionid)关联userID表明是我们身份,然后存放到cookie中。所以我们模拟登录时可以提交用户名和密码，也可以带cookie提交。</p>
 <p>一开始我模拟登录v2ex是想在网页上登陆后将From Data里的数据在代码里原封不动写上POST上去的，但试了几次不行，后来看了别人的代码发现要带上Headers 里面的Refer, Origin，于是登录就参考了别人的 <a href="https://github.com/bonfy/qiandao/blob/master/v2ex.py">代码</a>，也理解下思路。v2ex登录需要提交<code>用户名</code>,<code>密码</code>和<code>once</code> ，once和用户名、密码的key都是随机生成的，登录时可以在源代码里用正则表达式或者用Beautiful Soup找到。
           <!--noindex-->
           <div class="post-button text-center">
@@ -717,9 +717,13 @@
 
       
         
-          <p>在学生信息管理的例子中时，主页面应该是需要用户登录后才能查看的，但是用户可以在未登陆的时候在浏览器地址输入url直接访问，这里可以用过滤器来对用户请求进行统一认证即如果没有登录(session中获取不到用户信息)就全部转发到登录界面；并且可以同时在过滤器中设置编码转换，这样就不需要当请求里含有中文时都需要在提交到的Servlet中设置请求编码和响应编码问题。</p>
-<p>另外之前看到一个是视频讲到要对所有用户能输入的地方加以小心，例如我在测试时 <code>&lt;input&gt;</code>里输入<code>&lt;script&gt;alert(&quot;hello&quot;)&lt;/script&gt;</code> 每次刷新的话都会弹出；如果对用户输入的类型不加以识别就会很不安全，上网搜了下发现可以使用过滤器对每个 post 请求的参数过滤一些关键字，替换成安全的；当然防范攻击的方式有很多，可以在前端来进行防范。上次在论坛里也看到一个帖子也是关于前端和后端防范攻击讨论，这个以后需要好好了解下，这次就先总结下过滤器的一些知识吧。</p>
-<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>过滤器主要用于对用户请求进行预处理，也可以对HttpServletResponse进行后处理，是个典型的处理链。使用Filter的完整流程是：Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对服务器响应进行后处理。
+          <p>过滤器是一个服务器端组件可以截取用户端的请求与响应信息，并对这些信息进行过滤。</p>
+<p>过滤器主要用于对用户请求进行预处理，也可以对HttpServletResponse进行后处理，是个典型的处理链。使用Filter的完整流程是：Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对服务器响应进行后处理。</p>
+<p>例如在之前的学生信息管理的例子中，如果要求只有在用户登录后才能查看主页面和其它页面，不能让用户直接在地址栏里输入url就能访问，就可以使用过滤器来实现，可以在用户登陆验证的Servlet里将用户的信息放到session中，然后用户每次发送请求后，请求会先被过滤器拦截下来进行身份验证，如果没有登录即session中获取不到用户信息那就全部转发到登录界面。而且可以同时在过滤器中设置编码转换，这样就不需要每次当请求里含有中文时都需要在提交到的Servlet中设置请求编码和响应编码问题，但我看了别人的博客这只对post请求有效，如果是get请求要使用装饰模式增强request对象来实现。</p>
+<p>另外之前看到一个视频讲到要对所有用户能输入的地方加以小心，试了下如果输入一些HTML标签那整个页面就乱掉了，如果是其它恶意的代码那就更不安全，在GitHub上看到别人的 <a href="https://github.com/eson15/Javaweb_bookstore/tree/master/BookStore/src/filter">代码</a> 使用过滤器完成对HTML标签的转义，同样用到了装饰模式来实现，这次就记录下过滤器的一些知识点和使用装饰模式实现HTML标签转义的过程，之后还是要好好学习下设计模式。</p>
+<h4 id="创建Filter类"><a href="#创建Filter类" class="headerlink" title="创建Filter类"></a>创建Filter类</h4><p>1.创建一个类继承Filter接口，接口中定义了如下三个方法。</p>
+<ul>
+<li><p>void init(FilterConfig fConfig)：Filter的初始化，Filter在服务器启动时就创建，创建之后马上执行这个方法。用来初始化一些参数，这个方法可以读取web.xml文件中过滤器的参数。
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/16/过滤器Filter/#more" rel="contents">
@@ -763,7 +767,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/17/寒假/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/11/JDBC/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Feng">
@@ -788,8 +792,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/17/寒假/" itemprop="url">
-                  寒假
+                <a class="post-title-link" href="/2017/02/11/JDBC/" itemprop="url">
+                  JDBC
                 </a>
               
             
@@ -805,8 +809,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-17T20:51:58+08:00">
-                2017-02-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-11T22:34:24+08:00">
+                2017-02-11
               </time>
             
 
@@ -842,12 +846,18 @@
 
       
         
-          <p>寒假就要结束了，接下来就要进入大三下学期的生活，感觉时间过得很快。在这里写点东西，当做是寒假和上学期的总结，也记下点展望。</p>
-<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p>2016年国庆放假时跟着教程用Hexo建了博客，之后试着在上面写了点东西，因为经常看别人博客里总结的知识，深感自己会的太少了，写技术类的博客自己的水平肯定是不够的，但我觉得可以写一点在学习路线上的笔记，而且以后也会面对笔试面试，一些经常要用到的知识可以自己整理下放到博客里，需要的的时候也可以再看看。</p>
-<h3 id="英语"><a href="#英语" class="headerlink" title="英语"></a>英语</h3><p>英语不管在什么专业上都是很重要的，寒假也坚持每天背单词，虽然去年通过了六级但跟周围小伙伴们相比分数还是不高的，打算下学期再报一次，另外上学期也报了英语竞赛，接下来也要准备一段时间，希望能拿个奖。其实感觉语言的学习没有捷径，最重要的是输入和输出量，并且输出大于输入，就像学学习编程，天天光看源码肯定学不精，还是要自己多动手。英语学习的话平时就应该坚持多看一些英语文章，听听新闻，碰到不会的单词就应该马上搞懂，觉得对自己有用的内容就可以记录下来；另外兴趣是最好的老师，可以看自己喜欢的美剧(做到逐渐放弃字幕) 自己喜欢书籍的英文版和国外的学习课程。我觉得Quora和VOA都是很不错的途径。总之语言学习就是个长期积累不断重复的过程 ，贵在坚持。
+          <p>最近在完成一个简单的学生信息管理的例子，使用Jsp和Servlet实现了基本功能，数据层使用JDBC和MySQL，这次就记下一些用到的JDBC和MySQL的知识。</p>
+<h3 id="JDBC简介"><a href="#JDBC简介" class="headerlink" title="JDBC简介"></a>JDBC简介</h3><p>JDBC(java database connectivity)为Java数据库连接，是一种用于执行SQL语句的Java API，JDBC就是用Java语言来向各种关系型数据库发送sql语句从而来操作数据库。</p>
+<p>使用JDBC代码查询数据库的信息流程是我们需要创建一个数据库连接，然后再创建一个语句对象，接着进行查询；在最后我们需要关闭数据库连接、语句和结果集(关闭资源时采用倒关的手法)。</p>
+<h3 id="创建数据库连接"><a href="#创建数据库连接" class="headerlink" title="创建数据库连接"></a>创建数据库连接</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.加载驱动程序</span></div><div class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</div><div class="line"><span class="comment">//2.通过DriverManager类来获取数据库的连接</span></div><div class="line">Connection con =  DriverManager.getConnection(url, user, password);</div><div class="line"><span class="comment">//三个参数</span></div><div class="line">url = <span class="string">"jdbc:mysql://localhost:3306/数据库名称"</span>; <span class="comment">//url格式</span></div><div class="line">user = <span class="string">"root"</span>;  <span class="comment">//MySQL用户名</span></div><div class="line">password = <span class="string">"123456"</span>;   <span class="comment">//MySQL密码</span></div></pre></td></tr></table></figure>
+<h3 id="MySQL的一些基础"><a href="#MySQL的一些基础" class="headerlink" title="MySQL的一些基础"></a>MySQL的一些基础</h3><p>在命令行中输入<code>mysql -uroot -p</code>来进入MySQL，接着我们可以使用DDL语言来对数据库和表结构进行操作：</p>
+<p>查看所有数据库:<code>SHOW DATABASES;</code></p>
+<p>使用数据库:<code>USE 数据库名;</code>  (分号不能忘)</p>
+<p>在数据库中新建表，例如新建学生信息的表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`student`</span>(</div><div class="line"><span class="string">`id`</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT, </div><div class="line"><span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`gender`</span> <span class="built_in">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`age`</span> <span class="built_in">INT</span>(<span class="number">10</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"><span class="string">`number`</span> <span class="built_in">VARCHAR</span>(<span class="number">60</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>) </div><div class="line">)<span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/02/17/寒假/#more" rel="contents">
+            <a class="btn" href="/2017/02/11/JDBC/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -926,7 +936,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
